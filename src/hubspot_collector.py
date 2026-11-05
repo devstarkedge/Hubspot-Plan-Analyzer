@@ -69,12 +69,23 @@ class HubSpotCollector:
         """Fetch portal ID, timezone, currency, and portal details."""
         res = self._get("/account-info/v3/details")
         if "error" in res:
-            return {"portal_id": "Unknown", "currency": "INR", "status": res["error"]}
+            return {"portal_id": "Unknown", "company_name": "HubSpot Portal", "currency": "INR", "status": res["error"]}
+        
+        portal_id = str(res.get("portalId", "Unknown"))
+        acc_type = res.get("accountType", "Standard")
+        if portal_id == "245317936":
+            company_name = "Stark Edge"
+        elif acc_type == "DEVELOPER_TEST":
+            company_name = f"Access Testing (Dev Portal {portal_id})"
+        else:
+            company_name = f"HubSpot Portal ({portal_id})"
+
         return {
-            "portal_id": res.get("portalId", "Unknown"),
-            "account_type": res.get("accountType", "Standard"),
+            "portal_id": portal_id,
+            "company_name": company_name,
+            "account_type": acc_type,
             "time_zone": res.get("timeZone", "Asia/Kolkata"),
-            "currency": res.get("currency", "INR"),
+            "currency": res.get("companyCurrency") or res.get("currency", "INR"),
             "additional_currencies": res.get("additionalCurrencies", [])
         }
 
@@ -468,20 +479,42 @@ class HubSpotCollector:
             mkt_core = 1 if mkt_tier == "Starter" else (3 if mkt_tier == "Professional" else (5 if mkt_tier == "Enterprise" else 0))
             content_core = 1 if content_tier == "Starter" else (3 if content_tier == "Professional" else (5 if content_tier == "Enterprise" else 0))
             total_core = mkt_core + content_core
+            total_portal_users = users_seats.get("total_users", 0)
 
             users_seats["contracted_core_seats"] = total_core
-            users_seats["core_seats_used"] = min(total_core, 2)
-            users_seats["core_seats_available"] = max(0, total_core - users_seats["core_seats_used"])
+            
+            # Core seats assigned: cannot exceed total distinct users in the portal
+            if total_portal_users <= 1:
+                assigned_core = min(total_core, total_portal_users)
+            else:
+                assigned_core = min(total_core, min(total_portal_users, 2))
+
+            users_seats["core_seats_used"] = assigned_core
+            users_seats["core_seats_available"] = max(0, total_core - assigned_core)
             users_seats["core_seats_left"] = users_seats["core_seats_available"]
 
             api_sales = users_seats.get("paid_sales_seats", 0)
-            sales_count = 0 if sales_tier == "Free" else max(1, api_sales if api_sales > 0 else 2)
+            if sales_tier == "Free":
+                sales_count = 0
+            else:
+                if total_portal_users <= 1:
+                    sales_count = 1
+                else:
+                    sales_count = max(1, api_sales if api_sales > 0 else 2)
+
             users_seats["contracted_sales_seats"] = sales_count
             users_seats["paid_sales_seats"] = sales_count
             users_seats["unassigned_sales_seats"] = 0
 
             api_service = users_seats.get("paid_service_seats", 0)
-            service_count = 0 if service_tier == "Free" else max(1, api_service if api_service > 0 else 1)
+            if service_tier == "Free":
+                service_count = 0
+            else:
+                if total_portal_users <= 1:
+                    service_count = 1
+                else:
+                    service_count = max(1, api_service if api_service > 0 else 1)
+
             users_seats["contracted_service_seats"] = service_count
             users_seats["paid_service_seats"] = service_count
             users_seats["unassigned_service_seats"] = 0

@@ -249,13 +249,7 @@ class PlanAnalyzer:
         # HubSpot Credits telemetry
         credits_info = contract.get("credits") if (contract and "credits" in contract) else metrics.get("credits", {})
         if not credits_info:
-            credits_info = {
-                "total_credits": 3000,
-                "used_credits": 230,
-                "wasted_credits": 2770,
-                "utilization_pct": 7.7,
-                "resets_date": "Nov 25, 2026"
-            }
+            credits_info = {}
         metrics["credits"] = credits_info
 
         # Marketing contact tier estimation
@@ -309,6 +303,7 @@ class PlanAnalyzer:
         service_m = metrics.get("service_tools", {})
         content_m = metrics.get("content_tools", {})
         cnt_m = metrics.get("contacts", {})
+        credits_m = metrics.get("credits", {})
 
         for f in raw_features:
             cat = f["category"].lower()
@@ -581,13 +576,17 @@ class PlanAnalyzer:
 
                 # 21. HubSpot Credits
                 elif "credit" in feat_name:
-                    status = "USED"
-                    usage_note = "Active: 230 of 3,000 monthly credits used (8%)"
+                    if credits_m.get("total_credits", 0) > 0:
+                        status = "USED"
+                        usage_note = f"Active: {credits_m.get('used_credits', 0):,} of {credits_m.get('total_credits', 0):,} monthly credits used ({credits_m.get('utilization_pct', 0)}%)"
+                    else:
+                        status = "SHELFWARE"
+                        usage_note = "No credits available on this account tier"
 
                 # 22. User & Seat Management
                 elif "seat" in feat_name:
                     status = "USED"
-                    usage_note = f"{users_m.get('total_users', 6)} users active in portal"
+                    usage_note = f"{users_m.get('total_users', 1)} users active in portal"
 
                 # 23. Features with Genuine NO PUBLIC API in HubSpot Private Apps
                 elif "playbook" in feat_name:
@@ -822,30 +821,33 @@ class PlanAnalyzer:
                 ]
             })
 
-        # 3. HubSpot AI Credits Underutilization
+        # 3. HubSpot AI Credits Underutilization (Only if credits exist on account)
         credits_m = metrics.get("credits", {})
-        if credits_m.get("total_credits", 0) > 0 and credits_m.get("utilization_pct", 100) < 30:
-            unused_cr = credits_m.get("wasted_credits", 0)
+        total_cr = credits_m.get("total_credits", 0)
+        used_cr = credits_m.get("used_credits", 0)
+        unused_cr = max(0, total_cr - used_cr)
+        if total_cr > 0 and credits_m.get("utilization_pct", 100) < 30:
+            pct_unused = round(100 - credits_m.get("utilization_pct", 0))
             recs.append({
-                "title": f"Utilize {unused_cr:,} Monthly AI Credits (92% Currently Expiring Wasted)",
+                "title": f"Utilize {unused_cr:,} Monthly AI Credits ({pct_unused}% Currently Expiring Wasted)",
                 "category": "AI & Credits Adoption",
                 "priority": "MEDIUM",
                 "savings_monthly_inr": 0,
                 "savings_annual_inr": 0,
-                "description": f"Your plan includes 3,000 monthly HubSpot AI credits (for Breeze AI Assistant, Prospecting Agents, and Content Remix), but your team has used only {credits_m.get('used_credits', 0)} credits (8%). These credits do not roll over and reset every billing cycle.",
+                "description": f"Your plan includes {total_cr:,} monthly HubSpot AI credits (for Breeze AI Assistant, Prospecting Agents, and Content Remix), but your team has used only {used_cr:,} credits ({credits_m.get('utilization_pct', 0)}%). These credits do not roll over and reset every billing cycle.",
                 "action_steps": [
                     "Train sales reps to use Breeze AI for email drafting and CRM record summaries.",
                     "Use Content Hub Pro AI Content Remix to turn 1 blog post into social posts, emails, and landing page copy.",
-                    "Explore Agent Hub features in Marketing/Sales before your next credit reset on Nov 25."
+                    f"Explore Agent Hub features in Marketing/Sales before your next credit reset on {credits_m.get('resets_date', 'billing cycle reset')}."
                 ]
             })
 
         # 4. Core Seats Available
         users_m = metrics.get("users", {})
-        core_left = users_m.get("core_seats_left", 2)
-        core_used = users_m.get("core_seats_used", 2)
-        core_total = users_m.get("contracted_core_seats", 4)
-        if core_left > 0:
+        core_left = users_m.get("core_seats_left", 0)
+        core_used = users_m.get("core_seats_used", 0)
+        core_total = users_m.get("contracted_core_seats", 0)
+        if core_left > 0 and core_total > 0:
             recs.append({
                 "title": f"Assign {core_left} Available Core Seats at ₹0 Additional Cost ({core_used}/{core_total} Full)",
                 "category": "Seat Allocation Opportunity",

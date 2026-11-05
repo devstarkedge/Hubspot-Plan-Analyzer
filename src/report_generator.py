@@ -40,10 +40,11 @@ class ReportGenerator:
         core_available = users_m.get("core_seats_left", max(0, core_contracted - core_assigned))
 
         credits_m = metrics.get("credits", {})
-        credits_total = credits_m.get("total_credits", 3000)
-        credits_used = credits_m.get("used_credits", 230)
-        credits_pct = credits_m.get("utilization_pct", round((credits_used / max(1, credits_total)) * 100, 1))
-        credits_reset = credits_m.get("resets_date", "Nov 25, 2026")
+        has_credits = bool(credits_m and credits_m.get("total_credits", 0) > 0)
+        credits_total = credits_m.get("total_credits", 0)
+        credits_used = credits_m.get("used_credits", 0)
+        credits_pct = credits_m.get("utilization_pct", round((credits_used / max(1, credits_total)) * 100, 1)) if credits_total > 0 else 0
+        credits_reset = credits_m.get("resets_date", "N/A")
 
         contacts_m = metrics.get("contacts", {})
         contacts_used = contacts_m.get("marketing_contacts", 0)
@@ -146,6 +147,30 @@ class ReportGenerator:
 
         # Active plans badges
         plans_badges = " ".join([f"""<span class="plan-chip"><strong>{h}:</strong> {t}</span>""" for h, t in plans.items()])
+
+        credits_kpi_html = f"""
+            <div class="metric-card">
+                <div class="title">HubSpot AI Credits Used</div>
+                <div class="value val-warning">{credits_used:,} / {credits_total:,}</div>
+                <div class="sub">{credits_pct}% used &bull; {max(0, credits_total - credits_used):,} credits expire unutilized</div>
+            </div>""" if has_credits else """
+            <div class="metric-card">
+                <div class="title">HubSpot AI Credits</div>
+                <div class="value" style="color: #64748b; font-size: 22px; font-weight: 700;">No Credits Active</div>
+                <div class="sub">No AI credits bundle attached to this portal</div>
+            </div>"""
+
+        credits_summary_html = f"""
+            <div>
+                <div class="summary-item-label">Monthly HubSpot Credits</div>
+                <div class="summary-item-val" style="color: #b45309;">{credits_used:,} / {credits_total:,} ({credits_pct}%)</div>
+                <div class="summary-item-sub">Resets on {credits_reset}</div>
+            </div>""" if has_credits else """
+            <div>
+                <div class="summary-item-label">Monthly HubSpot Credits</div>
+                <div class="summary-item-val" style="color: #64748b;">Not Available</div>
+                <div class="summary-item-sub">No credits subscription</div>
+            </div>"""
 
         html_template = f"""<!DOCTYPE html>
 <html lang="en">
@@ -648,11 +673,7 @@ class ReportGenerator:
                 <div class="value val-warning">{adopt.get('adoption_rate_pct', 0)}%</div>
                 <div class="sub">🟢 {adopt.get('used_features', 0)} Used &bull; 🔴 {adopt.get('shelfware_features', 0)} Shelfware &bull; 🟡 {adopt.get('unverified_features', 0)} Unverified</div>
             </div>
-            <div class="metric-card">
-                <div class="title">HubSpot AI Credits Used</div>
-                <div class="value val-warning">{credits_used:,} / {credits_total:,}</div>
-                <div class="sub">{credits_pct}% used &bull; {max(0, credits_total - credits_used):,} credits expire unutilized</div>
-            </div>
+            {credits_kpi_html}
         </div>
 
         <!-- Live Usage & Limits Summary Banner -->
@@ -672,11 +693,7 @@ class ReportGenerator:
                 <div class="summary-item-val" style="color: #2563eb;">{core_assigned} / {core_contracted} ({core_available} seats left)</div>
                 <div class="summary-item-sub">Included in plan &bull; ₹0 extra cost</div>
             </div>
-            <div>
-                <div class="summary-item-label">Monthly HubSpot Credits</div>
-                <div class="summary-item-val" style="color: #b45309;">{credits_used:,} / {credits_total:,} ({credits_pct}%)</div>
-                <div class="summary-item-sub">Resets on {credits_reset}</div>
-            </div>
+            {credits_summary_html}
             <div>
                 <div class="summary-item-label">Marketing Contacts</div>
                 <div class="summary-item-val" style="color: #15803d;">{contacts_used:,} / {contacts_tier:,} ({contacts_pct}%)</div>

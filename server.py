@@ -190,11 +190,11 @@ INDEX_HTML = """<!DOCTYPE html>
 
                     <!-- Discount Checkbox -->
                     <div class="discount-box">
-                        <input type="checkbox" id="applyDiscounts" checked />
+                        <input type="checkbox" id="applyDiscounts" />
                         <div>
                             <strong>Apply Custom Partner Discounts from Invoice:</strong>
                             <div style="font-size: 12px; margin-top: 2px;">
-                                Applies negotiated partner contract discounts (e.g. Stark Edge: Sales Pro 40% off, Service Pro 39.93% off, Content Pro 50% off, Marketing Starter ₹5,010/3mo). <strong>Uncheck to evaluate standard HubSpot India INR catalog list prices for any portal.</strong>
+                                Optional: Applies negotiated partner invoice discounts (e.g. Stark Edge: Sales Pro 40% off, Service Pro 39.93% off, Content Pro 50% off, Marketing Starter ₹5,010/3mo, 3,000 AI Credits). <strong>Leave unchecked to evaluate standard HubSpot India INR catalog list prices for any portal.</strong>
                             </div>
                         </div>
                     </div>
@@ -255,28 +255,32 @@ INDEX_HTML = """<!DOCTYPE html>
             const hasDiscounts = document.getElementById('applyDiscounts').checked;
 
             const contractInfo = {
-                credits: {
+                contacts_quota: {
+                    tier: mktTier === 'Enterprise' ? 10000 : (mktTier === 'Professional' ? 2000 : (mktTier === 'Starter' ? 1000 : 0))
+                }
+            };
+
+            // Only attach Stark Edge specific partner discount overrides if explicitly checked
+            if (hasDiscounts) {
+                contractInfo.credits = {
                     total_credits: 3000,
                     used_credits: 230,
                     wasted_credits: 2770,
                     utilization_pct: 7.7,
                     resets_date: 'Nov 25, 2026'
-                },
-                contacts_quota: {
-                    tier: mktTier === 'Enterprise' ? 10000 : (mktTier === 'Professional' ? 2000 : (mktTier === 'Starter' ? 1000 : 0))
-                },
-                quarterly_billed: hasDiscounts ? {
+                };
+                contractInfo.quarterly_billed = {
                     'Marketing Hub': 5010.0,
                     'Sales Hub': 29988.0,
                     'Service Hub': 15011.99,
                     'Content Hub': 62550.0
-                } : {},
-                discounts: hasDiscounts ? {
+                };
+                contractInfo.discounts = {
                     'Sales Hub': 40.0,
                     'Service Hub': 39.93,
                     'Content Hub': 50.0
-                } : {}
-            };
+                };
+            }
 
             const payload = {
                 token: tokenVal,
