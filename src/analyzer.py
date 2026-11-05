@@ -438,13 +438,13 @@ class PlanAnalyzer:
                     st = str(sales_m.get("leads_status", ""))
                     if leads_cnt > 0:
                         status = "USED"
-                        usage_note = f"Active: {leads_cnt} lead records in Prospecting workspace"
+                        usage_note = f"Partial: {leads_cnt} lead records in Prospecting workspace"
                     elif "403" in st:
                         status = "UNVERIFIED"
                         usage_note = "Public Leads API available; requires 'crm.objects.leads.read' scope"
                     else:
                         status = "SHELFWARE"
-                        usage_note = "API Verified: 0 lead records in Prospecting workspace"
+                        usage_note = "Partial Telemetry: 0 lead records in Prospecting workspace (verify AI agent rules in Agent Hub)"
 
                 # 11. Phone Numbers, Calling & Transcription (Calls API)
                 elif any(k in feat_name for k in ["calling", "phone", "transcription", "coaching"]):
@@ -492,7 +492,7 @@ class PlanAnalyzer:
                         usage_note = "API Verified: 0 customer survey responses recorded"
 
                 # 14. CMS Domains, SSL & Hosting (CMS Domains API)
-                elif any(k in feat_name for k in ["domain", "hosting", "ssl", "cdn", "waf"]):
+                elif any(k in feat_name for k in ["domain", "custom domain", "ssl", "cdn", "waf"]) or ("hosting" in feat_name and "video" not in feat_name):
                     dom_cnt = content_m.get("domains_count", 0)
                     dom_names = content_m.get("domain_names", [])
                     st = str(content_m.get("domains_status", ""))
@@ -524,7 +524,7 @@ class PlanAnalyzer:
                         usage_note = f"Active: {vid_cnt} video assets hosted"
                     else:
                         status = "SHELFWARE"
-                        usage_note = "API Verified: 0 video media assets hosted"
+                        usage_note = "Partial Telemetry: 0 native video files hosted in File Manager (external embedded videos require manual check)"
 
                 # 17. CPQ Quotes & Product Library
                 elif "quote" in feat_name or "cpq" in feat_name:
@@ -535,6 +535,10 @@ class PlanAnalyzer:
                     else:
                         status = "SHELFWARE"
                         usage_note = "API Verified: 0 quotes generated in last 30 days"
+
+                elif "product usage" in feat_name:
+                    status = "UNVERIFIED"
+                    usage_note = "Partial Telemetry: SaaS usage tracking requires event webhook (verify in Service Settings > Product Usage)"
 
                 elif "product" in feat_name:
                     prc = sales_m.get("products_in_library", 0)
@@ -590,14 +594,18 @@ class PlanAnalyzer:
                         status = "SHELFWARE"
                         usage_note = "API Verified: 0 blog posts published"
 
-                # 21. HubSpot Credits
-                elif "credit" in feat_name:
+                # 21. HubSpot Credits / AI Credits
+                elif any(k in feat_name for k in ["credit", "ai content tools", "revenue ai"]):
                     if credits_m.get("total_credits", 0) > 0:
-                        status = "USED"
-                        usage_note = f"Active: {credits_m.get('used_credits', 0):,} of {credits_m.get('total_credits', 0):,} monthly credits used ({credits_m.get('utilization_pct', 0)}%)"
+                        if credits_m.get("used_credits", 0) > 0:
+                            status = "USED"
+                            usage_note = f"Active: {credits_m.get('used_credits', 0):,} of {credits_m.get('total_credits', 0):,} monthly credits used ({credits_m.get('utilization_pct', 0)}%)"
+                        else:
+                            status = "SHELFWARE"
+                            usage_note = f"API Verified: 0 of {credits_m.get('total_credits', 0):,} allocated credits used (100% idle)"
                     else:
-                        status = "SHELFWARE"
-                        usage_note = "No credits available on this account tier"
+                        status = "UNVERIFIED"
+                        usage_note = "Manual Check: No public Private App API in HubSpot (verify credit balance in Account Menu > HubSpot Credits)"
 
                 # 22. User & Seat Management
                 elif "seat" in feat_name:
