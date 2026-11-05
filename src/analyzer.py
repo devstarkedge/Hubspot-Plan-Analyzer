@@ -334,10 +334,10 @@ class PlanAnalyzer:
                 if "workflow" in feat_name or "automation" in feat_name:
                     if auto_m.get("active_workflows", 0) > 0:
                         status = "USED"
-                        usage_note = f"Active: {auto_m.get('active_workflows')} workflows running"
+                        usage_note = f"Active: {auto_m.get('active_workflows')} active workflows ({auto_m.get('total_workflows')} total in portal)"
                     else:
                         status = "SHELFWARE"
-                        usage_note = "API Verified: 0 active workflows running"
+                        usage_note = f"API Verified: 0 active workflows running ({auto_m.get('total_workflows', 0)} total in portal)"
 
                 # 2. Sales Sequences
                 elif "sequence" in feat_name:

@@ -171,20 +171,40 @@ class HubSpotCollector:
 
     def collect_automation(self) -> Dict[str, Any]:
         """Inspect Workflows and Sequences."""
-        wf_res = self._get("/automation/v3/workflows")
-        seq_res = self._get("/automation/v4/sequences")
-        
-        workflows = wf_res.get("workflows", []) if isinstance(wf_res, dict) and "workflows" in wf_res else []
-        active_workflows = [w for w in workflows if w.get("enabled")]
-        
-        sequences = seq_res.get("results", []) if isinstance(seq_res, dict) and "results" in seq_res else []
-        
+        # 1. Workflows: Query /automation/v4/flows to get all modern flows (matches HubSpot UI)
+        flows_res = self._get("/automation/v4/flows")
+        if isinstance(flows_res, dict) and "results" in flows_res and not flows_res.get("error"):
+            flows = flows_res.get("results", [])
+            total_workflows = len(flows)
+            active_workflows = len([f for f in flows if f.get("isEnabled") or str(f.get("status", "")).upper() == "PUBLISHED"])
+        else:
+            wf_res = self._get("/automation/v3/workflows")
+            workflows = wf_res.get("workflows", []) if isinstance(wf_res, dict) and "workflows" in wf_res else []
+            total_workflows = len(workflows)
+            active_workflows = len([w for w in workflows if w.get("enabled")])
+
+        # 2. Sequences: HubSpot requires ?userId=<id> on /automation/v4/sequences
+        users_res = self._get("/settings/v3/users")
+        users = users_res.get("results", []) if isinstance(users_res, dict) and "results" in users_res else []
+        seq_ids = set()
+        for u in users:
+            uid = u.get("id")
+            if not uid:
+                continue
+            seq_res = self._get("/automation/v4/sequences", params={"userId": uid})
+            if isinstance(seq_res, dict) and "results" in seq_res:
+                for s in seq_res["results"]:
+                    sid = s.get("id")
+                    if sid:
+                        seq_ids.add(str(sid))
+        total_sequences = len(seq_ids)
+
         return {
-            "total_workflows": len(workflows),
-            "active_workflows": len(active_workflows),
-            "total_sequences": len(sequences),
-            "workflows_status": "ok" if "error" not in wf_res else wf_res.get("error"),
-            "sequences_status": "ok" if "error" not in seq_res else seq_res.get("error")
+            "total_workflows": total_workflows,
+            "active_workflows": active_workflows,
+            "total_sequences": total_sequences,
+            "workflows_status": "ok",
+            "sequences_status": "ok"
         }
 
     def collect_marketing_and_cms(self) -> Dict[str, Any]:
@@ -193,9 +213,9 @@ class HubSpotCollector:
         pages_res = self._get("/cms/v3/pages/landing-pages")
         blogs_res = self._get("/cms/v3/blogs/posts")
         
-        forms_count = len(forms_res.get("results", [])) if "error" not in forms_res else 0
-        pages_count = len(pages_res.get("results", [])) if "error" not in pages_res else 0
-        blogs_count = len(blogs_res.get("results", [])) if "error" not in blogs_res else 0
+        forms_count = forms_res.get("total", len(forms_res.get("results", []))) if "error" not in forms_res else 0
+        pages_count = pages_res.get("total", len(pages_res.get("results", []))) if "error" not in pages_res else 0
+        blogs_count = blogs_res.get("total", len(blogs_res.get("results", []))) if "error" not in blogs_res else 0
         
         return {
             "forms_count": forms_count,
@@ -235,7 +255,15 @@ class HubSpotCollector:
 
     def collect_calls(self) -> Dict[str, Any]:
         """Fetch CRM calling activity and engagements."""
-        res = self._get("/crm/v3/objects/calls", params={"limit": 5})
+        # Query total calls via POST search for exact count across portal
+        search_res = self._post("/crm/v3/objects/calls/search", json_data={"limit": 1})
+        if isinstance(search_res, dict) and "total" in search_res:
+            return {
+                "total_calls": search_res["total"],
+                "sample_calls": 1 if search_res["total"] > 0 else 0,
+                "status": "ok"
+            }
+        res = self._get("/crm/v3/objects/calls", params={"limit": 1})
         if "error" in res:
             return {"total_calls": 0, "status": res["error"], "scope_error": "403" in str(res.get("error", ""))}
         return {
@@ -256,7 +284,13 @@ class HubSpotCollector:
 
     def collect_feedback_surveys(self) -> Dict[str, Any]:
         """Fetch CSAT and customer feedback submissions."""
-        res = self._get("/crm/v3/objects/feedback_submissions", params={"limit": 5})
+        search_res = self._post("/crm/v3/objects/feedback_submissions/search", json_data={"limit": 1})
+        if isinstance(search_res, dict) and "total" in search_res:
+            return {
+                "total_surveys": search_res["total"],
+                "status": "ok"
+            }
+        res = self._get("/crm/v3/objects/feedback_submissions", params={"limit": 1})
         if "error" in res:
             return {"total_surveys": 0, "status": res["error"], "scope_error": "403" in str(res.get("error", ""))}
         return {
@@ -278,7 +312,13 @@ class HubSpotCollector:
 
     def collect_leads(self) -> Dict[str, Any]:
         """Check Leads in Sales Prospecting workspace."""
-        res = self._get("/crm/v3/objects/leads", params={"limit": 5})
+        search_res = self._post("/crm/v3/objects/leads/search", json_data={"limit": 1})
+        if isinstance(search_res, dict) and "total" in search_res:
+            return {
+                "total_leads": search_res["total"],
+                "status": "ok"
+            }
+        res = self._get("/crm/v3/objects/leads", params={"limit": 1})
         if "error" in res:
             return {"total_leads": 0, "status": res["error"], "scope_error": "403" in str(res.get("error", ""))}
         return {
@@ -308,17 +348,24 @@ class HubSpotCollector:
 
     def collect_sales_assets(self) -> Dict[str, Any]:
         """Check CPQ Quotes and Products in library."""
-        quotes_res = self._get("/crm/v3/objects/quotes", params={"limit": 5})
-        products_res = self._get("/crm/v3/objects/products", params={"limit": 5})
-        
-        quotes_cnt = quotes_res.get("total", len(quotes_res.get("results", []))) if "error" not in quotes_res else 0
+        quotes_search = self._post("/crm/v3/objects/quotes/search", json_data={"limit": 1})
+        if isinstance(quotes_search, dict) and "total" in quotes_search:
+            quotes_cnt = quotes_search["total"]
+            quotes_err = None
+        else:
+            quotes_res = self._get("/crm/v3/objects/quotes", params={"limit": 1})
+            quotes_cnt = quotes_res.get("total", len(quotes_res.get("results", []))) if "error" not in quotes_res else 0
+            quotes_err = quotes_res.get("error") if "error" in quotes_res else None
+
+        products_res = self._get("/crm/v3/objects/products", params={"limit": 1})
         products_cnt = products_res.get("total", len(products_res.get("results", []))) if "error" not in products_res else 0
+        products_err = products_res.get("error") if "error" in products_res else None
         
         return {
             "quotes_created_30d": quotes_cnt,
             "products_in_library": products_cnt,
-            "quotes_error": quotes_res.get("error") if "error" in quotes_res else None,
-            "products_error": products_res.get("error") if "error" in products_res else None
+            "quotes_error": quotes_err,
+            "products_error": products_err
         }
 
     def collect_events(self) -> Dict[str, Any]:
