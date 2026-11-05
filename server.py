@@ -269,6 +269,26 @@ INDEX_HTML = """<!DOCTYPE html>
     </div>
 
     <script>
+        function resetLoadingState() {
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            if (submitBtn) {
+                submitBtn.style.display = 'flex';
+                submitBtn.disabled = false;
+            }
+            if (loading) {
+                loading.style.display = 'none';
+            }
+        }
+
+        // Restore button and hide loading spinner whenever page is shown (handles browser back button & bfcache)
+        window.addEventListener('pageshow', function (event) {
+            resetLoadingState();
+        });
+        window.addEventListener('popstate', function () {
+            resetLoadingState();
+        });
+
         let detectTimer = null;
         function debounceDetect() {
             clearTimeout(detectTimer);
@@ -404,6 +424,7 @@ INDEX_HTML = """<!DOCTYPE html>
                 });
                 const res = await resp.json();
                 if (res.success) {
+                    resetLoadingState();
                     window.location.href = '/report';
                 } else {
                     alert('Audit Error: ' + (res.error || 'Failed to analyze portal'));

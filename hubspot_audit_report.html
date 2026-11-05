@@ -172,6 +172,8 @@
         .hub-service-hub { background: #e0e7ff; color: #4338ca; }
         .hub-content-hub { background: #f3e8ff; color: #7e22ce; }
         .hub-data-hub { background: #f1f5f9; color: #334155; }
+        .hub-commerce-hub, .hub-revenue-hub { background: #fae8ff; color: #86198f; }
+        .hub-smart-crm, .hub-platform-wide { background: #fce7f3; color: #9d174d; }
 
         /* Category & Tier Tags */
         .category-tag { display: inline-block; background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 500; white-space: nowrap; }
@@ -351,6 +353,8 @@
         .dot-service { background: #6366f1; }
         .dot-content { background: #a855f7; }
         .dot-data { background: #0ea5e9; }
+        .dot-rev { background: #8b5cf6; }
+        .dot-crm { background: #ec4899; }
 
         .dot-used { background: #10b981; }
         .dot-shelfware { background: #ef4444; }
@@ -472,9 +476,9 @@
         <div class="header">
             <div>
                 <h1>HubSpot Plan &amp; Feature Utilization Audit</h1>
-                <p>Portal: <strong>Access Testing (Dev Portal 247900268)</strong> (Portal ID: 247900268) &bull; Currency: <strong>₹ INR</strong> &bull; Generated: 2026-11-05 18:11:00</p>
+                <p>Portal: <strong>Access Testing (Dev Portal 247900268)</strong> (Portal ID: 247900268) &bull; Currency: <strong>₹ INR</strong> &bull; Generated: 2026-11-05 18:18:07</p>
                 <div class="plans-bar">
-                    <span class="plan-chip"><strong>Marketing Hub:</strong> Starter</span> <span class="plan-chip"><strong>Sales Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Service Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Content Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Data Hub:</strong> Free</span>
+                    <span class="plan-chip"><strong>Marketing Hub:</strong> Starter</span> <span class="plan-chip"><strong>Sales Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Service Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Content Hub:</strong> Professional</span> <span class="plan-chip"><strong>Data Hub:</strong> Free</span> <span class="plan-chip"><strong>Commerce Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Revenue Hub:</strong> Enterprise</span> <span class="plan-chip"><strong>Smart CRM:</strong> Free</span> <span class="plan-chip"><strong>Platform-wide:</strong> Free</span>
                 </div>
             </div>
             <div>
@@ -486,8 +490,8 @@
         <div class="metrics-grid">
             <div class="metric-card">
                 <div class="title">Current Monthly Spend</div>
-                <div class="value">₹151,670</div>
-                <div class="sub">Quarterly: ₹455,010 &bull; Bill + GST: ₹132,821</div>
+                <div class="value">₹91,770</div>
+                <div class="sub">Quarterly: ₹275,310 &bull; Bill + GST: ₹132,821</div>
             </div>
             <div class="metric-card">
                 <div class="title">Wasted Monthly Spend</div>
@@ -496,8 +500,8 @@
             </div>
             <div class="metric-card">
                 <div class="title">Feature Adoption Rate</div>
-                <div class="value val-warning">47.7%</div>
-                <div class="sub">🟢 52 Used &bull; 🔴 27 Shelfware &bull; 🟡 30 Unverified</div>
+                <div class="value val-warning">51.1%</div>
+                <div class="sub">🟢 68 Used &bull; 🔴 34 Shelfware &bull; 🟡 31 Unverified</div>
             </div>
             
             <div class="metric-card">
@@ -521,7 +525,7 @@
             </div>
             <div>
                 <div class="summary-item-label">Core Seats</div>
-                <div class="summary-item-val" style="color: #2563eb;">1 / 6 (5 seats left)</div>
+                <div class="summary-item-val" style="color: #2563eb;">1 / 4 (3 seats left)</div>
                 <div class="summary-item-sub">Included in plan &bull; ₹0 extra cost</div>
             </div>
             
@@ -540,7 +544,7 @@
         <!-- Navigation Tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab('summary')">Executive Summary &amp; ROI</button>
-            <button class="tab-btn" onclick="openTab('matrix')">Full Feature Matrix (109 in-plan)</button>
+            <button class="tab-btn" onclick="openTab('matrix')">Full Feature Matrix (133 in-plan)</button>
             <button class="tab-btn" onclick="openTab('downgrades')">Downgrade Risk Simulation (0)</button>
             <button class="tab-btn" onclick="openTab('recs')">Optimization Recommendations (1)</button>
         </div>
@@ -583,10 +587,24 @@
             </tr>
             
             <tr>
-                <td><strong>Content Hub (Enterprise Base)</strong></td>
+                <td><strong>Content Hub (Professional Base)</strong></td>
                 <td>Flat Base Plan</td>
-                <td class="amount">₹125,000</td>
-                <td class="amount">₹1,500,000</td>
+                <td class="amount">₹41,700</td>
+                <td class="amount">₹500,400</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Commerce Hub (Enterprise Base)</strong></td>
+                <td>Flat Base Plan</td>
+                <td class="amount">₹11,700</td>
+                <td class="amount">₹140,400</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Revenue Hub (Enterprise Base)</strong></td>
+                <td>Flat Base Plan</td>
+                <td class="amount">₹11,700</td>
+                <td class="amount">₹140,400</td>
             </tr>
             
                         </tbody>
@@ -602,14 +620,14 @@
                     <div>
                         <span class="prio-tag prio-low">LOW PRIORITY</span>
                         <span class="cat-pill">Seat Allocation Opportunity</span>
-                        <h3 style="margin-top: 8px;">Assign 5 Available Core Seats at ₹0 Additional Cost (1/6 Full)</h3>
+                        <h3 style="margin-top: 8px;">Assign 3 Available Core Seats at ₹0 Additional Cost (1/4 Full)</h3>
                     </div>
                     
                 </div>
-                <p style="color: #4b5563; font-size: 15px; margin: 12px 0;">You are paying for 6 Core Seats (1 bundled in Marketing Starter + 3 in Content Hub Pro). Currently, 1 seats are assigned (1/6 Full, 5 seats left). You can assign the remaining 5 seats to additional team members at zero extra cost.</p>
+                <p style="color: #4b5563; font-size: 15px; margin: 12px 0;">You are paying for 4 Core Seats (1 bundled in Marketing Starter + 3 in Content Hub Pro). Currently, 1 seats are assigned (1/4 Full, 3 seats left). You can assign the remaining 3 seats to additional team members at zero extra cost.</p>
                 <div class="steps-box">
                     <strong>Implementation Steps:</strong>
-                    <ol><li>Go to Settings > Users & Teams.</li><li>Invite up to 5 additional collaborators, project managers, or executives.</li><li>Assign them 'Core Seat' to give them full CRM viewing and reporting access without paying extra.</li></ol>
+                    <ol><li>Go to Settings > Users & Teams.</li><li>Invite up to 3 additional collaborators, project managers, or executives.</li><li>Assign them 'Core Seat' to give them full CRM viewing and reporting access without paying extra.</li></ol>
                 </div>
             </div>
             
@@ -671,6 +689,16 @@
                                     <span>Data Hub</span>
                                     <svg class="item-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                                 </div>
+                                <div class="dropdown-item" data-val="Commerce Hub" onclick="selectHub('Commerce Hub', 'Commerce Hub')">
+                                    <span class="item-dot dot-rev"></span>
+                                    <span>Commerce Hub</span>
+                                    <svg class="item-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <div class="dropdown-item" data-val="Smart CRM" onclick="selectHub('Smart CRM', 'Smart CRM')">
+                                    <span class="item-dot dot-crm"></span>
+                                    <span>Smart CRM</span>
+                                    <svg class="item-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
                             </div>
                         </div>
 
@@ -722,12 +750,12 @@
                     </div>
 
                     <div class="status-chips">
-                        <button class="status-chip active" data-status="ALL" onclick="setStatusChip('ALL')">All <span class="chip-num" id="countAll">152</span></button>
-                        <button class="status-chip chip-used" data-status="USED" onclick="setStatusChip('USED')">🟢 Used <span class="chip-num" id="countUsed">52</span></button>
-                        <button class="status-chip chip-shelfware" data-status="SHELFWARE" onclick="setStatusChip('SHELFWARE')">🔴 Shelfware <span class="chip-num" id="countShelfware">27</span></button>
-                        <button class="status-chip chip-unverified" data-status="UNVERIFIED" onclick="setStatusChip('UNVERIFIED')">🟡 Unverified <span class="chip-num" id="countUnverified">30</span></button>
+                        <button class="status-chip active" data-status="ALL" onclick="setStatusChip('ALL')">All <span class="chip-num" id="countAll">176</span></button>
+                        <button class="status-chip chip-used" data-status="USED" onclick="setStatusChip('USED')">🟢 Used <span class="chip-num" id="countUsed">68</span></button>
+                        <button class="status-chip chip-shelfware" data-status="SHELFWARE" onclick="setStatusChip('SHELFWARE')">🔴 Shelfware <span class="chip-num" id="countShelfware">34</span></button>
+                        <button class="status-chip chip-unverified" data-status="UNVERIFIED" onclick="setStatusChip('UNVERIFIED')">🟡 Unverified <span class="chip-num" id="countUnverified">31</span></button>
                         <button class="status-chip chip-locked" data-status="LOCKED" onclick="setStatusChip('LOCKED')">🔒 Locked <span class="chip-num" id="countLocked">43</span></button>
-                        <span class="results-count" id="resultsCount">Showing 152 features</span>
+                        <span class="results-count" id="resultsCount">Showing 176 features</span>
                     </div>
                 </div>
 
@@ -1984,7 +2012,7 @@
                     <td class="col-feat"><strong>Data sync</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="usage-note note-used">Active: Standard CRM and app data sync enabled</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Data Hub" data-status="USED" data-tier="Free" data-name="custom field mappings" data-cat="mapping">
@@ -1993,7 +2021,7 @@
                     <td class="col-feat"><strong>Custom field mappings</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="usage-note note-used">Active: Custom property field mappings active</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Data Hub" data-status="USED" data-tier="Free" data-name="data quality overview" data-cat="quality">
@@ -2011,7 +2039,7 @@
                     <td class="col-feat"><strong>Deduplication</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="usage-note note-used">Active: CRM contact/company deduplication enabled</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Data Hub" data-status="USED" data-tier="Free" data-name="data enrichment" data-cat="enrichment">
@@ -2020,7 +2048,7 @@
                     <td class="col-feat"><strong>Data enrichment</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="usage-note note-used">Active: Breeze AI company & contact data enrichment enabled</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Data Hub" data-status="USED" data-tier="Free" data-name="data workflows" data-cat="automation">
@@ -2113,6 +2141,222 @@
                     <td class="usage-note note-used">1 users active in portal</td>
                 </tr>
                 
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="SHELFWARE" data-tier="Free" data-name="quote creation and management" data-cat="quotes">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">Quotes</span></td>
+                    <td class="col-feat"><strong>Quote creation and management</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: 0 quotes generated in last 30 days</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="SHELFWARE" data-tier="Starter" data-name="configure-price-quote" data-cat="cpq">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">CPQ</span></td>
+                    <td class="col-feat"><strong>Configure-price-quote</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: 0 quotes generated in last 30 days</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="SHELFWARE" data-tier="Free" data-name="subscriptions and billing" data-cat="billing">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">Billing</span></td>
+                    <td class="col-feat"><strong>Subscriptions and billing</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: 0 active payment links or billing quotes configured</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="SHELFWARE" data-tier="Free" data-name="payment links and collection" data-cat="payments">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">Payments</span></td>
+                    <td class="col-feat"><strong>Payment links and collection</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: 0 active payment links or billing quotes configured</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="USED" data-tier="Free" data-name="quote-to-cash/revenue automation" data-cat="automation">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">Automation</span></td>
+                    <td class="col-feat"><strong>Quote-to-cash/revenue automation</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 4 active workflows (4 total in portal)</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="USED" data-tier="Free" data-name="revenue reporting" data-cat="analytics">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">Analytics</span></td>
+                    <td class="col-feat"><strong>Revenue reporting</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: Revenue & payment reporting dashboards active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="SHELFWARE" data-tier="Free" data-name="revenue ai / credits" data-cat="ai">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">AI</span></td>
+                    <td class="col-feat"><strong>Revenue AI / credits</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">No credits available on this account tier</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Commerce Hub" data-status="USED" data-tier="Free" data-name="revenue seats" data-cat="seats">
+                    <td class="col-hub"><span class="hub-pill hub-commerce-hub">Commerce Hub</span></td>
+                    <td class="col-cat"><span class="category-tag">Seats</span></td>
+                    <td class="col-feat"><strong>Revenue seats</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">1 users active in portal</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="contacts, companies, deals, tickets and activities" data-cat="crm">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">CRM</span></td>
+                    <td class="col-feat"><strong>Contacts, companies, deals, tickets and activities</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 2 contacts & CRM records actively managed</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="SHELFWARE" data-tier="Free" data-name="custom objects" data-cat="crm">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">CRM</span></td>
+                    <td class="col-feat"><strong>Custom objects</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: 0 custom objects created (Enterprise capability idle)</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="record permissions and teams" data-cat="crm">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">CRM</span></td>
+                    <td class="col-feat"><strong>Record permissions and teams</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="dashboard/report limits" data-cat="reporting">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Reporting</span></td>
+                    <td class="col-feat"><strong>Dashboard/report limits</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="daily api calls" data-cat="api">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">API</span></td>
+                    <td class="col-feat"><strong>Daily API calls</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="api rate limit" data-cat="api">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">API</span></td>
+                    <td class="col-feat"><strong>API rate limit</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="api capacity pack" data-cat="api">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">API</span></td>
+                    <td class="col-feat"><strong>API capacity pack</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="api rate limit with capacity pack" data-cat="api">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">API</span></td>
+                    <td class="col-feat"><strong>API rate limit with capacity pack</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="paid contact storage" data-cat="crm limits">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">CRM limits</span></td>
+                    <td class="col-feat"><strong>Paid contact storage</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 2 contacts & CRM records actively managed</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="UNVERIFIED" data-tier="Free" data-name="forms and fields" data-cat="forms">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Forms</span></td>
+                    <td class="col-feat"><strong>Forms and fields</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">Public Forms API available; requires 'forms' scope to poll</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="chatbots/live chat widgets" data-cat="conversations">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Conversations</span></td>
+                    <td class="col-feat"><strong>Chatbots/live chat widgets</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="social connected accounts/posts" data-cat="social">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Social</span></td>
+                    <td class="col-feat"><strong>Social connected accounts/posts</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="SHELFWARE" data-tier="Free" data-name="hubspot credits" data-cat="ai">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">AI</span></td>
+                    <td class="col-feat"><strong>HubSpot Credits</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">No credits available on this account tier</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="contact tier and marketing email sends" data-cat="marketing contacts">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Marketing contacts</span></td>
+                    <td class="col-feat"><strong>Contact tier and marketing email sends</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 2 contacts & CRM records actively managed</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="support channels" data-cat="support">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Support</span></td>
+                    <td class="col-feat"><strong>Support channels</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
+                <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="downgrade impact" data-cat="downgrade">
+                    <td class="col-hub"><span class="hub-pill hub-smart-crm">Smart CRM</span></td>
+                    <td class="col-cat"><span class="category-tag">Downgrade</span></td>
+                    <td class="col-feat"><strong>Downgrade impact</strong></td>
+                    <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
+                </tr>
+                
                         </tbody>
                     </table>
                 </div>
@@ -2140,14 +2384,14 @@
                     <div>
                         <span class="prio-tag prio-low">LOW PRIORITY</span>
                         <span class="cat-pill">Seat Allocation Opportunity</span>
-                        <h3 style="margin-top: 8px;">Assign 5 Available Core Seats at ₹0 Additional Cost (1/6 Full)</h3>
+                        <h3 style="margin-top: 8px;">Assign 3 Available Core Seats at ₹0 Additional Cost (1/4 Full)</h3>
                     </div>
                     
                 </div>
-                <p style="color: #4b5563; font-size: 15px; margin: 12px 0;">You are paying for 6 Core Seats (1 bundled in Marketing Starter + 3 in Content Hub Pro). Currently, 1 seats are assigned (1/6 Full, 5 seats left). You can assign the remaining 5 seats to additional team members at zero extra cost.</p>
+                <p style="color: #4b5563; font-size: 15px; margin: 12px 0;">You are paying for 4 Core Seats (1 bundled in Marketing Starter + 3 in Content Hub Pro). Currently, 1 seats are assigned (1/4 Full, 3 seats left). You can assign the remaining 3 seats to additional team members at zero extra cost.</p>
                 <div class="steps-box">
                     <strong>Implementation Steps:</strong>
-                    <ol><li>Go to Settings > Users & Teams.</li><li>Invite up to 5 additional collaborators, project managers, or executives.</li><li>Assign them 'Core Seat' to give them full CRM viewing and reporting access without paying extra.</li></ol>
+                    <ol><li>Go to Settings > Users & Teams.</li><li>Invite up to 3 additional collaborators, project managers, or executives.</li><li>Assign them 'Core Seat' to give them full CRM viewing and reporting access without paying extra.</li></ol>
                 </div>
             </div>
             
@@ -2269,7 +2513,10 @@
                 const cat = row.getAttribute('data-cat') || '';
                 const note = row.querySelector('.usage-note')?.textContent.toLowerCase() || '';
 
-                const hubMatch = (selectedHub === 'ALL' || hub === selectedHub);
+                const hubMatch = (selectedHub === 'ALL' || hub === selectedHub ||
+                    (selectedHub === 'Commerce Hub' && (hub === 'Revenue Hub' || hub === 'Commerce Hub')) ||
+                    (selectedHub === 'Smart CRM' && (hub === 'Platform-wide' || hub === 'Smart CRM')) ||
+                    (selectedHub === 'Data Hub' && (hub.includes('Data Hub') || hub.includes('Operations'))));
                 const statusMatch = (selectedStatus === 'ALL' || status === selectedStatus);
                 const inPlanMatch = (!inPlanOnly || status !== 'LOCKED');
                 const searchMatch = !searchVal || name.includes(searchVal) || cat.includes(searchVal) || note.includes(searchVal) || hub.toLowerCase().includes(searchVal);

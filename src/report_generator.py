@@ -655,7 +655,8 @@ class ReportGenerator:
                     {plans_badges}
                 </div>
             </div>
-            <div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <a href="/" class="btn-print" style="text-decoration: none; background: white; color: #334155; border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 6px;">← Back to Analyzer</a>
                 <button onclick="window.print()" class="btn-print">Print / Save PDF</button>
             </div>
         </div>
