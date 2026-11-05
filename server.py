@@ -76,6 +76,30 @@ INDEX_HTML = """<!DOCTYPE html>
         }
         .select-box:hover { border-color: #94a3b8; background-color: #f8fafc; }
         .select-box:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255, 92, 53, 0.15); background-color: white; }
+        .select-box:disabled {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            border-color: #e2e8f0;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .plan-section-locked {
+            opacity: 0.5;
+            pointer-events: none;
+            user-select: none;
+            filter: grayscale(15%);
+            transition: all 0.3s ease;
+        }
+
+        .plan-section-unlocked {
+            opacity: 1;
+            pointer-events: auto;
+            user-select: auto;
+            filter: none;
+            transition: all 0.3s ease;
+        }
+
         .helper { font-size: 13px; color: var(--gray-600); margin-top: 6px; }
 
         .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 10px; }
@@ -84,7 +108,24 @@ INDEX_HTML = """<!DOCTYPE html>
 
         .btn-submit { width: 100%; background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; }
         .btn-submit:hover { background: var(--primary-dark); }
-        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #94a3b8 !important;
+            box-shadow: none;
+        }
+
+        .spinner-mini {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #bfdbfe;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
 
         #loading { display: none; text-align: center; padding: 24px; }
         .spinner { width: 36px; height: 36px; border: 4px solid #fed7aa; border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
@@ -126,14 +167,19 @@ INDEX_HTML = """<!DOCTYPE html>
                 <!-- Live Auto-Detection Banner -->
                 <div id="detectionBanner" style="display: none; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #166534; margin-top: 14px; align-items: center; justify-content: space-between;">
                     <div id="detectionText"></div>
-                    <span style="font-size: 11px; font-weight: 700; background: #dcfce7; padding: 3px 8px; border-radius: 5px; color: #15803d; white-space: nowrap; margin-left: 10px;">LIVE API VERIFIED</span>
+                    <span id="detectionBadge" style="font-size: 11px; font-weight: 700; background: #dcfce7; padding: 3px 8px; border-radius: 5px; color: #15803d; white-space: nowrap; margin-left: 10px;">LIVE API VERIFIED</span>
                 </div>
 
-                <!-- Plan Customization Accordion -->
-                <div class="form-group" style="margin-top: 24px;">
-                    <label style="margin-bottom: 2px;">Select Your Purchased Hub Plans:</label>
-                    <div style="font-size: 13px; color: #64748b; margin-bottom: 12px;">
-                        User seats (Sales, Service, Revenue &amp; Core) are automatically fetched by the API from your live CRM users &amp; selected tier allowances.
+                <!-- Plan Customization Accordion (Disabled until token entered & fetched) -->
+                <div id="planSection" class="form-group plan-section-locked" style="margin-top: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <label style="margin-bottom: 0;"><strong>Purchased Hub Plans &amp; Tiers:</strong></label>
+                        <span id="planLockBadge" style="font-size: 11px; font-weight: 700; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 6px;">
+                            🔒 Locked &bull; Add Token Above
+                        </span>
+                    </div>
+                    <div id="planHelpText" style="font-size: 13px; color: #64748b; margin-bottom: 12px;">
+                        Enter your HubSpot Private App Token above. The API will auto-detect your active seats and unlock plan configuration.
                     </div>
 
                     <div class="plans-grid">
@@ -143,7 +189,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 <label style="margin-bottom: 0;"><strong>Marketing Hub</strong></label>
                                 <span id="mkt_badge" style="background: #dbeafe; color: #1e40af; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">+1 Core Seat</span>
                             </div>
-                            <select id="plan_mkt" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_mkt" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Starter" selected>Starter</option>
                                 <option value="Professional">Professional</option>
                                 <option value="Enterprise">Enterprise</option>
@@ -157,7 +203,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 <label style="margin-bottom: 0;"><strong>Sales Hub</strong></label>
                                 <span id="sales_badge" style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Pro CRM</span>
                             </div>
-                            <select id="plan_sales" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_sales" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Professional" selected>Professional</option>
                                 <option value="Starter">Starter</option>
                                 <option value="Enterprise">Enterprise</option>
@@ -171,7 +217,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 <label style="margin-bottom: 0;"><strong>Service Hub</strong></label>
                                 <span id="service_badge" style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Pro Service</span>
                             </div>
-                            <select id="plan_service" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_service" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Professional" selected>Professional</option>
                                 <option value="Starter">Starter</option>
                                 <option value="Enterprise">Enterprise</option>
@@ -185,7 +231,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 <label style="margin-bottom: 0;"><strong>Content Hub</strong></label>
                                 <span id="content_badge" style="background: #dbeafe; color: #1e40af; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">+3 Core Seats</span>
                             </div>
-                            <select id="plan_content" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_content" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Professional" selected>Professional</option>
                                 <option value="Starter">Starter</option>
                                 <option value="Enterprise">Enterprise</option>
@@ -202,7 +248,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 </div>
                                 <span id="data_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free Tools</span>
                             </div>
-                            <select id="plan_data" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_data" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Free" selected>Free</option>
                                 <option value="Starter">Starter</option>
                                 <option value="Professional">Professional</option>
@@ -219,7 +265,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 </div>
                                 <span id="revenue_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free Tools</span>
                             </div>
-                            <select id="plan_revenue" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_revenue" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Free" selected>Free</option>
                                 <option value="Professional">Professional</option>
                                 <option value="Enterprise">Enterprise</option>
@@ -235,7 +281,7 @@ INDEX_HTML = """<!DOCTYPE html>
                                 </div>
                                 <span id="crm_badge" style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Included ₹0</span>
                             </div>
-                            <select id="plan_crm" class="select-box" onchange="updateAllPlansAndSeats()">
+                            <select id="plan_crm" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
                                 <option value="Free" selected>Free Foundation (Included)</option>
                                 <option value="Starter">Starter CRM Suite</option>
                                 <option value="Professional">Professional CRM Suite</option>
@@ -246,7 +292,7 @@ INDEX_HTML = """<!DOCTYPE html>
 
                     <!-- Discount Checkbox -->
                     <div class="discount-box">
-                        <input type="checkbox" id="applyDiscounts" />
+                        <input type="checkbox" id="applyDiscounts" disabled />
                         <div>
                             <strong>Apply Custom Partner Discounts from Invoice:</strong>
                             <div style="font-size: 12px; margin-top: 2px;">
@@ -256,8 +302,8 @@ INDEX_HTML = """<!DOCTYPE html>
                     </div>
                 </div>
 
-                <button type="submit" id="submitBtn" class="btn-submit">
-                    <span>Analyze Live Portal &amp; Generate Audit Report</span>
+                <button type="submit" id="submitBtn" class="btn-submit" disabled>
+                    <span id="btnText">Enter Token to Analyze Portal</span>
                 </button>
             </form>
 
@@ -269,21 +315,69 @@ INDEX_HTML = """<!DOCTYPE html>
     </div>
 
     <script>
+        function setPlansLocked(locked, reasonText) {
+            const section = document.getElementById('planSection');
+            const badge = document.getElementById('planLockBadge');
+            const help = document.getElementById('planHelpText');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+
+            const selects = ['plan_mkt', 'plan_sales', 'plan_service', 'plan_content', 'plan_data', 'plan_revenue', 'plan_crm', 'applyDiscounts'];
+            selects.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.disabled = locked;
+            });
+
+            if (locked) {
+                if (section) {
+                    section.classList.remove('plan-section-unlocked');
+                    section.classList.add('plan-section-locked');
+                }
+                if (badge) {
+                    badge.innerHTML = '🔒 Locked &bull; Add Token Above';
+                    badge.style.background = '#fef3c7';
+                    badge.style.color = '#b45309';
+                }
+                if (help) help.textContent = reasonText || 'Enter your HubSpot Private App Token above. The API will auto-detect your active seats and unlock plan configuration.';
+                if (submitBtn) submitBtn.disabled = true;
+                if (btnText) btnText.textContent = 'Enter Token to Analyze Portal';
+            } else {
+                if (section) {
+                    section.classList.remove('plan-section-locked');
+                    section.classList.add('plan-section-unlocked');
+                }
+                if (badge) {
+                    badge.innerHTML = '🔓 Unlocked &bull; Live Telemetry Synced';
+                    badge.style.background = '#dcfce7';
+                    badge.style.color = '#15803d';
+                }
+                if (help) help.textContent = 'User seats & allowances auto-detected from live API. You can review or adjust plan tiers below before auditing.';
+                if (submitBtn) submitBtn.disabled = false;
+                if (btnText) btnText.textContent = 'Analyze Live Portal & Generate Audit Report';
+            }
+        }
+
         function resetLoadingState() {
             const submitBtn = document.getElementById('submitBtn');
             const loading = document.getElementById('loading');
+            const token = document.getElementById('token').value.trim();
+
+            if (loading) loading.style.display = 'none';
             if (submitBtn) {
                 submitBtn.style.display = 'flex';
-                submitBtn.disabled = false;
-            }
-            if (loading) {
-                loading.style.display = 'none';
+                submitBtn.disabled = !(token && token.length >= 15);
             }
         }
 
         // Restore button and hide loading spinner whenever page is shown (handles browser back button & bfcache)
         window.addEventListener('pageshow', function (event) {
             resetLoadingState();
+            const token = document.getElementById('token').value.trim();
+            if (token && token.length >= 15) {
+                autoDetectPortal();
+            } else {
+                setPlansLocked(true);
+            }
         });
         window.addEventListener('popstate', function () {
             resetLoadingState();
@@ -292,12 +386,43 @@ INDEX_HTML = """<!DOCTYPE html>
         let detectTimer = null;
         function debounceDetect() {
             clearTimeout(detectTimer);
-            detectTimer = setTimeout(autoDetectPortal, 500);
+            const token = document.getElementById('token').value.trim();
+            const banner = document.getElementById('detectionBanner');
+            const textEl = document.getElementById('detectionText');
+            const badgeEl = document.getElementById('detectionBadge');
+
+            if (!token || token.length < 15) {
+                if (banner) banner.style.display = 'none';
+                setPlansLocked(true);
+                return;
+            }
+
+            // Immediately show connecting status
+            if (banner && textEl && badgeEl) {
+                banner.style.display = 'flex';
+                banner.style.background = '#eff6ff';
+                banner.style.borderColor = '#93c5fd';
+                banner.style.color = '#1e40af';
+                textEl.innerHTML = '<span class="spinner-mini"></span> Connecting to HubSpot API &amp; detecting user seats...';
+                badgeEl.textContent = 'FETCHING SEATS...';
+                badgeEl.style.background = '#dbeafe';
+                badgeEl.style.color = '#1e40af';
+            }
+            setPlansLocked(true, 'Connecting to HubSpot to fetch user seats and permissions...');
+
+            detectTimer = setTimeout(autoDetectPortal, 400);
         }
 
         async function autoDetectPortal() {
             const token = document.getElementById('token').value.trim();
-            if (!token || token.length < 15) return;
+            if (!token || token.length < 15) {
+                setPlansLocked(true);
+                return;
+            }
+
+            const banner = document.getElementById('detectionBanner');
+            const textEl = document.getElementById('detectionText');
+            const badgeEl = document.getElementById('detectionBadge');
 
             try {
                 const resp = await fetch('/api/detect', {
@@ -307,26 +432,50 @@ INDEX_HTML = """<!DOCTYPE html>
                 });
                 const res = await resp.json();
                 if (res.success) {
-                    const banner = document.getElementById('detectionBanner');
-                    const textEl = document.getElementById('detectionText');
-                    
                     let seatsSummary = [];
                     if (res.paid_sales_seats > 0) seatsSummary.push(`${res.paid_sales_seats} Sales ${res.detected_sales_tier || 'Seat'}${res.paid_sales_seats > 1 ? 's' : ''}`);
                     if (res.paid_service_seats > 0) seatsSummary.push(`${res.paid_service_seats} Service ${res.detected_service_tier || 'Seat'}${res.paid_service_seats > 1 ? 's' : ''}`);
                     if (res.paid_revenue_seats > 0) seatsSummary.push(`${res.paid_revenue_seats} Commerce ${res.detected_revenue_tier || 'Seat'}${res.paid_revenue_seats > 1 ? 's' : ''}`);
                     if (res.core_seats_used > 0) seatsSummary.push(`${res.core_seats_used} Core Seats`);
 
-                    textEl.innerHTML = `<strong>Connected: ${res.company_name} (Portal ${res.portal_id})</strong> &bull; Auto-detected: ${seatsSummary.join(', ') || res.total_users + ' team users'}`;
                     banner.style.display = 'flex';
+                    banner.style.background = '#f0fdf4';
+                    banner.style.borderColor = '#86efac';
+                    banner.style.color = '#166534';
+                    textEl.innerHTML = `<strong>Connected: ${res.company_name} (Portal ${res.portal_id})</strong> &bull; Auto-detected: ${seatsSummary.join(', ') || res.total_users + ' team users'}`;
+                    badgeEl.textContent = 'LIVE API VERIFIED';
+                    badgeEl.style.background = '#dcfce7';
+                    badgeEl.style.color = '#15803d';
 
                     // Auto-select detected tiers
                     if (res.detected_sales_tier) document.getElementById('plan_sales').value = res.detected_sales_tier;
                     if (res.detected_service_tier) document.getElementById('plan_service').value = res.detected_service_tier;
                     if (res.detected_revenue_tier) document.getElementById('plan_revenue').value = res.detected_revenue_tier;
                     updateAllPlansAndSeats();
+
+                    // Unlock plan selection and enable Analyze button!
+                    setPlansLocked(false);
+                } else {
+                    banner.style.display = 'flex';
+                    banner.style.background = '#fef2f2';
+                    banner.style.borderColor = '#fca5a5';
+                    banner.style.color = '#991b1b';
+                    textEl.innerHTML = `<strong>Connection Error:</strong> ${res.error || 'Invalid token or missing required permissions.'}`;
+                    badgeEl.textContent = 'TOKEN ERROR';
+                    badgeEl.style.background = '#fee2e2';
+                    badgeEl.style.color = '#991b1b';
+                    setPlansLocked(true, 'Token error: Please verify your Private App Token and permissions.');
                 }
             } catch(e) {
-                console.log('Detect error:', e);
+                banner.style.display = 'flex';
+                banner.style.background = '#fef2f2';
+                banner.style.borderColor = '#fca5a5';
+                banner.style.color = '#991b1b';
+                textEl.innerHTML = `<strong>Connection Error:</strong> ${e.message}`;
+                badgeEl.textContent = 'NETWORK ERROR';
+                badgeEl.style.background = '#fee2e2';
+                badgeEl.style.color = '#991b1b';
+                setPlansLocked(true, 'Network error connecting to API.');
             }
         }
 
@@ -437,6 +586,15 @@ INDEX_HTML = """<!DOCTYPE html>
                 loading.style.display = 'none';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = document.getElementById('token').value.trim();
+            if (token && token.length >= 15) {
+                autoDetectPortal();
+            } else {
+                setPlansLocked(true);
+            }
+        });
     </script>
 </body>
 </html>
