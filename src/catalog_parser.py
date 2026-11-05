@@ -253,18 +253,54 @@ class HubSpotCatalog:
                 "Enterprise": ent_val
             })
 
+    def normalize_hub(self, hub: str) -> str:
+        """Normalize various Hub aliases to Master Catalog canonical names."""
+        h = (hub or "").strip().lower()
+        if "commerce" in h or "revenue" in h:
+            return "Revenue Hub"
+        if "data" in h or "operations" in h or "ops" in h:
+            return "Data Hub"
+        if "crm" in h or "platform" in h:
+            return "Platform-wide"
+        if "market" in h:
+            return "Marketing Hub"
+        if "sales" in h:
+            return "Sales Hub"
+        if "service" in h:
+            return "Service Hub"
+        if "content" in h or "cms" in h:
+            return "Content Hub"
+        return hub
+
     def get_plan_pricing(self, hub: str, plan: str) -> Optional[Dict[str, Any]]:
-        hub_lower = hub.lower().replace(" hub", "")
-        plan_lower = plan.lower()
+        norm_hub = self.normalize_hub(hub)
+        plan_lower = (plan or "").lower()
+
+        # Platform-wide / Smart CRM Free foundation
+        if norm_hub == "Platform-wide" or "crm" in (hub or "").lower():
+            return {
+                "hub": "Smart CRM",
+                "plan": plan or "Free",
+                "price_shown": "₹0/month",
+                "list_price": "₹0/month",
+                "pay_monthly": "₹0/month",
+                "pay_annually": "₹0/month",
+                "est_monthly_inr": 0,
+                "est_annual_monthly_inr": 0
+            }
+
+        hub_lower = norm_hub.lower().replace(" hub", "")
         for p in self.pricing_cards:
-            p_hub_lower = p["hub"].lower().replace(" hub", "")
-            if p_hub_lower == hub_lower and p["plan"].lower() == plan_lower:
-                return p
+            p_hub_lower = self.normalize_hub(p["hub"]).lower().replace(" hub", "")
+            p_plan_lower = p["plan"].lower()
+            if p_hub_lower == hub_lower:
+                if p_plan_lower == plan_lower or (plan_lower == "free" and "free" in p_plan_lower):
+                    return p
         return None
 
     def get_features_for_hub(self, hub: str) -> List[Dict[str, Any]]:
-        hub_lower = hub.lower().replace(" hub", "")
-        return [f for f in self.feature_matrix if f["hub"].lower().replace(" hub", "") == hub_lower]
+        norm_hub = self.normalize_hub(hub)
+        return [f for f in self.feature_matrix if self.normalize_hub(f["hub"]) == norm_hub]
 
     def get_summary_stats(self) -> Dict[str, Any]:
         return {

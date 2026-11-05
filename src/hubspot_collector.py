@@ -90,8 +90,11 @@ class HubSpotCollector:
         }
 
     def collect_users_and_seats(self) -> Dict[str, Any]:
-        """Inspect users, seat types (Sales / Service / Core), and active vs inactive status."""
-        res = self._get("/settings/v3/users/")
+        """Inspect users, seat types (Sales / Service / Core / Revenue), and active vs inactive status using latest 2026-09 API."""
+        res = self._get("/settings/users/2026-09")
+        if "error" in res or not res.get("results"):
+            res = self._get("/settings/v3/users/")
+
         if "error" in res:
             return {"error": res["error"], "total_users": 0, "paid_sales_seats": 0, "paid_service_seats": 0}
         
@@ -99,38 +102,87 @@ class HubSpotCollector:
         total_users = len(users)
         paid_sales_seats = 0
         paid_service_seats = 0
-        active_users_30d = 0
-        inactive_users_30d = 0
+        paid_revenue_seats = 0
+        core_seats_used = 0
+        view_only_seats = 0
         super_admins = 0
 
-        # Inspect users and seat types across all HubSpot seat schema variations
-        core_seats_used = 0
+        detected_sales_tier = None
+        detected_service_tier = None
+        detected_revenue_tier = None
+
         for u in users:
             if u.get("superAdmin"):
                 super_admins += 1
             
+            seat_names = [str(s).lower() for s in u.get("seatNames", [])]
             u_str = str(u).lower()
-            
-            # Check sales seat (primarySeat, additionalSeats, role, paidSalesSeat)
-            if (u.get("paidSalesSeat") or 
-                "sales-pro" in u_str or "sales_pro" in u_str or 
-                "sales" in str(u.get("primarySeat", "")).lower() or 
-                (u.get("role") and "sales" in str(u.get("role")).lower())):
+
+            # 1. Sales seat check
+            is_sales = False
+            for s in seat_names:
+                if "sales" in s:
+                    is_sales = True
+                    if "ent" in s:
+                        detected_sales_tier = "Enterprise"
+                    elif "pro" in s and detected_sales_tier != "Enterprise":
+                        detected_sales_tier = "Professional"
+                    elif not detected_sales_tier:
+                        detected_sales_tier = "Starter"
+
+            if not is_sales:
+                if (u.get("paidSalesSeat") or "sales-pro" in u_str or "sales_pro" in u_str or
+                    "sales" in str(u.get("primarySeat", "")).lower() or
+                    (u.get("role") and "sales" in str(u.get("role")).lower())):
+                    is_sales = True
+
+            if is_sales:
                 paid_sales_seats += 1
-                
-            # Check service seat
-            if (u.get("paidServiceSeat") or 
-                "service-pro" in u_str or "service_pro" in u_str or 
-                "service" in str(u.get("primarySeat", "")).lower() or 
-                (u.get("role") and "service" in str(u.get("role")).lower())):
+
+            # 2. Service seat check
+            is_service = False
+            for s in seat_names:
+                if "service" in s:
+                    is_service = True
+                    if "ent" in s:
+                        detected_service_tier = "Enterprise"
+                    elif "pro" in s and detected_service_tier != "Enterprise":
+                        detected_service_tier = "Professional"
+                    elif not detected_service_tier:
+                        detected_service_tier = "Starter"
+
+            if not is_service:
+                if (u.get("paidServiceSeat") or "service-pro" in u_str or "service_pro" in u_str or
+                    "service" in str(u.get("primarySeat", "")).lower() or
+                    (u.get("role") and "service" in str(u.get("role")).lower())):
+                    is_service = True
+
+            if is_service:
                 paid_service_seats += 1
-                
-            # Check core seat
-            if "core" in u_str or "core" in str(u.get("primarySeat", "")).lower():
+
+            # 3. Revenue / Commerce seat check
+            is_rev = False
+            for s in seat_names:
+                if "commerce" in s or "revenue" in s:
+                    is_rev = True
+                    if "ent" in s:
+                        detected_revenue_tier = "Enterprise"
+                    elif not detected_revenue_tier:
+                        detected_revenue_tier = "Professional"
+
+            if is_rev:
+                paid_revenue_seats += 1
+
+            # 4. Core seat check
+            if any("core" in s for s in seat_names) or "core" in u_str or "core" in str(u.get("primarySeat", "")).lower():
                 core_seats_used += 1
 
-        # Check active deal owners in CRM to auto-detect assigned sales reps
-        if paid_sales_seats == 0:
+            # 5. View-only seat check
+            if any("view" in s for s in seat_names):
+                view_only_seats += 1
+
+        # Check active deal owners in CRM to auto-detect assigned sales reps if 0
+        if paid_sales_seats == 0 and total_users > 0:
             deal_owners = set()
             deals_res = self._get("/crm/v3/objects/deals", params={"properties": "hubspot_owner_id", "limit": 100})
             if isinstance(deals_res, dict) and "results" in deals_res:
@@ -138,18 +190,23 @@ class HubSpotCollector:
                     oid = d.get("properties", {}).get("hubspot_owner_id")
                     if oid:
                         deal_owners.add(str(oid))
-            paid_sales_seats = len(deal_owners) if deal_owners else 1
+            paid_sales_seats = len(deal_owners) if deal_owners else min(total_users, 1)
 
-        if paid_service_seats == 0:
-            paid_service_seats = 1
+        if paid_service_seats == 0 and total_users > 0:
+            paid_service_seats = min(total_users, 1)
 
         return {
             "total_users": total_users,
             "super_admins": super_admins,
             "paid_sales_seats": paid_sales_seats,
             "paid_service_seats": paid_service_seats,
+            "paid_revenue_seats": paid_revenue_seats,
             "core_seats_used": core_seats_used,
-            "users_list_sample": [{"email": u.get("email"), "id": u.get("id")} for u in users[:5]]
+            "view_only_seats": view_only_seats,
+            "detected_sales_tier": detected_sales_tier,
+            "detected_service_tier": detected_service_tier,
+            "detected_revenue_tier": detected_revenue_tier,
+            "users_list_sample": [{"email": u.get("email"), "id": u.get("id"), "seats": u.get("seatNames", [])} for u in users[:5]]
         }
 
     def collect_pipelines(self) -> Dict[str, Any]:
@@ -475,10 +532,14 @@ class HubSpotCollector:
             content_tier = cur_plans.get("Content Hub", "Professional")
             sales_tier = cur_plans.get("Sales Hub", "Professional")
             service_tier = cur_plans.get("Service Hub", "Professional")
+            data_tier = cur_plans.get("Data Hub", cur_plans.get("Data Hub (formerly Operations Hub)", "Free"))
+            rev_tier = cur_plans.get("Commerce Hub", cur_plans.get("Revenue Hub", "Free"))
+            crm_tier = cur_plans.get("Smart CRM", "Free")
 
             mkt_core = 1 if mkt_tier == "Starter" else (3 if mkt_tier == "Professional" else (5 if mkt_tier == "Enterprise" else 0))
             content_core = 1 if content_tier == "Starter" else (3 if content_tier == "Professional" else (5 if content_tier == "Enterprise" else 0))
-            total_core = mkt_core + content_core
+            data_core = 1 if data_tier in ["Starter", "Professional", "Enterprise"] else 0
+            total_core = mkt_core + content_core + data_core
             total_portal_users = users_seats.get("total_users", 0)
 
             users_seats["contracted_core_seats"] = total_core
@@ -525,7 +586,9 @@ class HubSpotCollector:
             "Sales Hub": "Professional" if automation.get("total_sequences", 0) > 0 or pipelines.get("deal_pipelines_count", 0) > 2 else "Starter",
             "Service Hub": "Professional" if users_seats.get("paid_service_seats", 0) > 0 else "Free",
             "Content Hub": "Professional" if marketing.get("landing_pages_count", 0) > 0 or marketing.get("blog_posts_count", 0) > 0 else "Free",
-            "Data Hub": "Free"
+            "Data Hub": "Free",
+            "Commerce Hub": "Free",
+            "Smart CRM": "Free"
         }
 
         # Structure combined metrics

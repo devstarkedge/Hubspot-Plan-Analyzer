@@ -346,6 +346,8 @@ class ReportGenerator:
         .hub-service-hub {{ background: #e0e7ff; color: #4338ca; }}
         .hub-content-hub {{ background: #f3e8ff; color: #7e22ce; }}
         .hub-data-hub {{ background: #f1f5f9; color: #334155; }}
+        .hub-commerce-hub, .hub-revenue-hub {{ background: #fae8ff; color: #86198f; }}
+        .hub-smart-crm, .hub-platform-wide {{ background: #fce7f3; color: #9d174d; }}
 
         /* Category & Tier Tags */
         .category-tag {{ display: inline-block; background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 500; white-space: nowrap; }}
@@ -525,6 +527,8 @@ class ReportGenerator:
         .dot-service {{ background: #6366f1; }}
         .dot-content {{ background: #a855f7; }}
         .dot-data {{ background: #0ea5e9; }}
+        .dot-rev {{ background: #8b5cf6; }}
+        .dot-crm {{ background: #ec4899; }}
 
         .dot-used {{ background: #10b981; }}
         .dot-shelfware {{ background: #ef4444; }}
@@ -791,6 +795,16 @@ class ReportGenerator:
                                     <span>Data Hub</span>
                                     <svg class="item-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                                 </div>
+                                <div class="dropdown-item" data-val="Commerce Hub" onclick="selectHub('Commerce Hub', 'Commerce Hub')">
+                                    <span class="item-dot dot-rev"></span>
+                                    <span>Commerce Hub</span>
+                                    <svg class="item-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <div class="dropdown-item" data-val="Smart CRM" onclick="selectHub('Smart CRM', 'Smart CRM')">
+                                    <span class="item-dot dot-crm"></span>
+                                    <span>Smart CRM</span>
+                                    <svg class="item-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
                             </div>
                         </div>
 
@@ -1005,7 +1019,10 @@ class ReportGenerator:
                 const cat = row.getAttribute('data-cat') || '';
                 const note = row.querySelector('.usage-note')?.textContent.toLowerCase() || '';
 
-                const hubMatch = (selectedHub === 'ALL' || hub === selectedHub);
+                const hubMatch = (selectedHub === 'ALL' || hub === selectedHub ||
+                    (selectedHub === 'Commerce Hub' && (hub === 'Revenue Hub' || hub === 'Commerce Hub')) ||
+                    (selectedHub === 'Smart CRM' && (hub === 'Platform-wide' || hub === 'Smart CRM')) ||
+                    (selectedHub === 'Data Hub' && (hub.includes('Data Hub') || hub.includes('Operations'))));
                 const statusMatch = (selectedStatus === 'ALL' || status === selectedStatus);
                 const inPlanMatch = (!inPlanOnly || status !== 'LOCKED');
                 const searchMatch = !searchVal || name.includes(searchVal) || cat.includes(searchVal) || note.includes(searchVal) || hub.toLowerCase().includes(searchVal);

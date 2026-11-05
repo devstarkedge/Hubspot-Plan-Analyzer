@@ -58,6 +58,9 @@ def main():
     parser.add_argument("--service-plan", choices=TIERS, default=None, help="Service Hub tier")
     parser.add_argument("--service-seats", type=int, default=None, help="Contracted Service Pro seats")
     parser.add_argument("--content-plan", choices=TIERS, default=None, help="Content Hub tier")
+    parser.add_argument("--data-plan", choices=TIERS, default=None, help="Data Hub tier")
+    parser.add_argument("--commerce-plan", "--revenue-plan", choices=TIERS, default=None, help="Commerce Hub / Revenue Hub tier")
+    parser.add_argument("--crm-plan", choices=TIERS, default=None, help="Smart CRM tier")
 
     parser.add_argument("--export-html", type=str, default="hubspot_audit_report.html", help="Path to save HTML report")
     parser.add_argument("--export-md", type=str, default=None, help="Path to save Markdown summary")
@@ -101,7 +104,9 @@ def main():
             seats["service"] = prompt_int("Enter number of contracted Service seats:", 1)
             
         plans["Content Hub"] = prompt_select("Select Content Hub Plan:", TIERS, "Professional")
-        plans["Data Hub"] = "Free"
+        plans["Data Hub"] = prompt_select("Select Data Hub (formerly Operations Hub) Plan:", TIERS, "Free")
+        plans["Commerce Hub"] = prompt_select("Select Commerce Hub (Invoicing & CPQ) Plan:", ["Free", "Professional", "Enterprise"], "Free")
+        plans["Smart CRM"] = prompt_select("Select Smart CRM Plan:", ["Free", "Starter", "Professional", "Enterprise"], "Free")
     else:
         if not token:
             print("\n[-] Error: HubSpot Private App Token is required.")
@@ -116,6 +121,12 @@ def main():
             plans["Service Hub"] = args.service_plan
         if args.content_plan:
             plans["Content Hub"] = args.content_plan
+        if args.data_plan:
+            plans["Data Hub"] = args.data_plan
+        if args.commerce_plan:
+            plans["Commerce Hub"] = args.commerce_plan
+        if args.crm_plan:
+            plans["Smart CRM"] = args.crm_plan
         
         if args.sales_seats is not None:
             seats["sales"] = args.sales_seats

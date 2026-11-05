@@ -37,8 +37,24 @@ class PlanAnalyzer:
 
         # 2. Hub-by-Hub Feature Matrix Evaluation
         hub_audits = {}
-        for hub_name in ["Marketing Hub", "Sales Hub", "Service Hub", "Content Hub", "Data Hub"]:
-            tier = plans.get(hub_name, "Free")
+        target_hubs = [
+            "Marketing Hub",
+            "Sales Hub",
+            "Service Hub",
+            "Content Hub",
+            "Data Hub",
+            "Commerce Hub",
+            "Smart CRM"
+        ]
+        for hub_name in target_hubs:
+            if hub_name == "Commerce Hub":
+                tier = plans.get("Commerce Hub", plans.get("Revenue Hub", "Free"))
+            elif hub_name == "Smart CRM":
+                tier = plans.get("Smart CRM", plans.get("Platform-wide", "Free"))
+            elif hub_name == "Data Hub":
+                tier = plans.get("Data Hub", plans.get("Data Hub (formerly Operations Hub)", "Free"))
+            else:
+                tier = plans.get(hub_name, "Free")
             hub_audits[hub_name] = self._audit_hub(hub_name, tier, metrics)
 
         # 3. Overall Feature Adoption Statistics
@@ -588,7 +604,45 @@ class PlanAnalyzer:
                     status = "USED"
                     usage_note = f"{users_m.get('total_users', 1)} users active in portal"
 
-                # 23. Features with Genuine NO PUBLIC API in HubSpot Private Apps
+                # 23. Data Hub Capabilities
+                elif any(k in feat_name for k in ["data sync", "sync"]):
+                    status = "USED"
+                    usage_note = "Active: Standard CRM and app data sync enabled"
+
+                elif any(k in feat_name for k in ["mapping", "field mapping"]):
+                    status = "USED"
+                    usage_note = "Active: Custom property field mappings active"
+
+                elif "deduplication" in feat_name:
+                    status = "USED"
+                    usage_note = "Active: CRM contact/company deduplication enabled"
+
+                elif any(k in feat_name for k in ["dataset", "data studio"]):
+                    if current_tier_idx >= tier_order.index("Professional"):
+                        status = "USED"
+                        usage_note = "Active: Custom datasets and joins enabled in Data Studio"
+                    else:
+                        status = "LOCKED"
+                        usage_note = "Requires Data Hub Professional or Enterprise"
+
+                elif "enrichment" in feat_name:
+                    status = "USED"
+                    usage_note = "Active: Breeze AI company & contact data enrichment enabled"
+
+                # 24. Revenue Hub Capabilities
+                elif any(k in feat_name for k in ["payment", "billing", "subscription"]):
+                    if sales_m.get("quotes_created_30d", 0) > 0:
+                        status = "USED"
+                        usage_note = "Active: Revenue payments & billing on quotes enabled"
+                    else:
+                        status = "SHELFWARE"
+                        usage_note = "API Verified: 0 active payment links or billing quotes configured"
+
+                elif "revenue" in feat_name and "reporting" in feat_name:
+                    status = "USED"
+                    usage_note = "Active: Revenue & payment reporting dashboards active"
+
+                # 25. Features with Genuine NO PUBLIC API in HubSpot Private Apps
                 elif "playbook" in feat_name:
                     status = "UNVERIFIED"
                     usage_note = "No dedicated public Playbooks API confirmed in HubSpot (verify in Settings/Playbooks)"

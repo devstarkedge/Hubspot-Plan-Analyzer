@@ -116,18 +116,24 @@ INDEX_HTML = """<!DOCTYPE html>
                 <!-- Live Token Section -->
                 <div class="form-group">
                     <label for="token">HubSpot Private App Access Token <span style="color: #ef4444;">*</span></label>
-                    <input type="password" id="token" class="input-text" placeholder="pat-na1-xxxx-xxxx-xxxx" required />
+                    <input type="password" id="token" class="input-text" placeholder="pat-na1-xxxx-xxxx-xxxx" required oninput="debounceDetect()" />
                     <div class="helper">
-                        Generate in HubSpot (<strong>Settings ⚙️ &gt; Integrations &gt; Private Apps</strong>) with 4 read scopes:
+                        Generate in HubSpot (<strong>Settings ⚙️ &gt; Integrations &gt; Private Apps</strong>) with read scopes:
                         <code>crm.objects.contacts.read</code>, <code>crm.objects.deals.read</code>, <code>settings.users.read</code>, <code>automation</code>.
                     </div>
+                </div>
+
+                <!-- Live Auto-Detection Banner -->
+                <div id="detectionBanner" style="display: none; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #166534; margin-top: 14px; align-items: center; justify-content: space-between;">
+                    <div id="detectionText"></div>
+                    <span style="font-size: 11px; font-weight: 700; background: #dcfce7; padding: 3px 8px; border-radius: 5px; color: #15803d; white-space: nowrap; margin-left: 10px;">LIVE API VERIFIED</span>
                 </div>
 
                 <!-- Plan Customization Accordion -->
                 <div class="form-group" style="margin-top: 24px;">
                     <label style="margin-bottom: 2px;">Select Your Purchased Hub Plans:</label>
                     <div style="font-size: 13px; color: #64748b; margin-bottom: 12px;">
-                        Seats and contacts are automatically detected and fetched by the API from your live CRM users &amp; selected tier allowances.
+                        User seats (Sales, Service, Revenue &amp; Core) are automatically fetched by the API from your live CRM users &amp; selected tier allowances.
                     </div>
 
                     <div class="plans-grid">
@@ -186,6 +192,56 @@ INDEX_HTML = """<!DOCTYPE html>
                                 <option value="Free">Free</option>
                             </select>
                         </div>
+
+                        <!-- Data Hub (formerly Operations Hub) -->
+                        <div class="plan-item">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <div>
+                                    <label style="margin-bottom: 0;"><strong>Data Hub</strong></label>
+                                    <div style="font-size: 10px; color: #64748b; margin-top: -2px;">(formerly Operations Hub)</div>
+                                </div>
+                                <span id="data_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free Tools</span>
+                            </div>
+                            <select id="plan_data" class="select-box" onchange="updateAllPlansAndSeats()">
+                                <option value="Free" selected>Free</option>
+                                <option value="Starter">Starter</option>
+                                <option value="Professional">Professional</option>
+                                <option value="Enterprise">Enterprise</option>
+                            </select>
+                        </div>
+
+                        <!-- Commerce Hub -->
+                        <div class="plan-item">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <div>
+                                    <label style="margin-bottom: 0;"><strong>Commerce Hub</strong></label>
+                                    <div style="font-size: 10px; color: #64748b; margin-top: -2px;">(Invoicing &amp; CPQ)</div>
+                                </div>
+                                <span id="revenue_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free Tools</span>
+                            </div>
+                            <select id="plan_revenue" class="select-box" onchange="updateAllPlansAndSeats()">
+                                <option value="Free" selected>Free</option>
+                                <option value="Professional">Professional</option>
+                                <option value="Enterprise">Enterprise</option>
+                            </select>
+                        </div>
+
+                        <!-- Smart CRM -->
+                        <div class="plan-item">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <div>
+                                    <label style="margin-bottom: 0;"><strong>Smart CRM</strong></label>
+                                    <div style="font-size: 10px; color: #64748b; margin-top: -2px;">(Platform Foundation)</div>
+                                </div>
+                                <span id="crm_badge" style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Included ₹0</span>
+                            </div>
+                            <select id="plan_crm" class="select-box" onchange="updateAllPlansAndSeats()">
+                                <option value="Free" selected>Free Foundation (Included)</option>
+                                <option value="Starter">Starter CRM Suite</option>
+                                <option value="Professional">Professional CRM Suite</option>
+                                <option value="Enterprise">Enterprise CRM Suite</option>
+                            </select>
+                        </div>
                     </div>
 
                     <!-- Discount Checkbox -->
@@ -213,12 +269,45 @@ INDEX_HTML = """<!DOCTYPE html>
     </div>
 
     <script>
-        function getPlanCoreSeats(hub, tier) {
-            if (tier === 'Free') return 0;
-            if (tier === 'Starter') return 1;
-            if (tier === 'Professional') return 3;
-            if (tier === 'Enterprise') return 5;
-            return 0;
+        let detectTimer = null;
+        function debounceDetect() {
+            clearTimeout(detectTimer);
+            detectTimer = setTimeout(autoDetectPortal, 500);
+        }
+
+        async function autoDetectPortal() {
+            const token = document.getElementById('token').value.trim();
+            if (!token || token.length < 15) return;
+
+            try {
+                const resp = await fetch('/api/detect', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+                const res = await resp.json();
+                if (res.success) {
+                    const banner = document.getElementById('detectionBanner');
+                    const textEl = document.getElementById('detectionText');
+                    
+                    let seatsSummary = [];
+                    if (res.paid_sales_seats > 0) seatsSummary.push(`${res.paid_sales_seats} Sales ${res.detected_sales_tier || 'Seat'}${res.paid_sales_seats > 1 ? 's' : ''}`);
+                    if (res.paid_service_seats > 0) seatsSummary.push(`${res.paid_service_seats} Service ${res.detected_service_tier || 'Seat'}${res.paid_service_seats > 1 ? 's' : ''}`);
+                    if (res.paid_revenue_seats > 0) seatsSummary.push(`${res.paid_revenue_seats} Commerce ${res.detected_revenue_tier || 'Seat'}${res.paid_revenue_seats > 1 ? 's' : ''}`);
+                    if (res.core_seats_used > 0) seatsSummary.push(`${res.core_seats_used} Core Seats`);
+
+                    textEl.innerHTML = `<strong>Connected: ${res.company_name} (Portal ${res.portal_id})</strong> &bull; Auto-detected: ${seatsSummary.join(', ') || res.total_users + ' team users'}`;
+                    banner.style.display = 'flex';
+
+                    // Auto-select detected tiers
+                    if (res.detected_sales_tier) document.getElementById('plan_sales').value = res.detected_sales_tier;
+                    if (res.detected_service_tier) document.getElementById('plan_service').value = res.detected_service_tier;
+                    if (res.detected_revenue_tier) document.getElementById('plan_revenue').value = res.detected_revenue_tier;
+                    updateAllPlansAndSeats();
+                }
+            } catch(e) {
+                console.log('Detect error:', e);
+            }
         }
 
         function updateAllPlansAndSeats() {
@@ -226,11 +315,17 @@ INDEX_HTML = """<!DOCTYPE html>
             const salesTier = document.getElementById('plan_sales').value;
             const serviceTier = document.getElementById('plan_service').value;
             const contentTier = document.getElementById('plan_content').value;
+            const dataTier = document.getElementById('plan_data').value;
+            const revTier = document.getElementById('plan_revenue').value;
+            const crmTier = document.getElementById('plan_crm').value;
 
             document.getElementById('mkt_badge').textContent = mktTier === 'Free' ? 'Free Tools' : (mktTier === 'Starter' ? '+1 Core Seat' : (mktTier === 'Professional' ? '+3 Core Seats' : '+5 Core Seats'));
             document.getElementById('sales_badge').textContent = salesTier === 'Free' ? 'Free CRM' : (salesTier === 'Starter' ? 'Starter CRM' : (salesTier === 'Professional' ? 'Pro CRM' : 'Enterprise CRM'));
             document.getElementById('service_badge').textContent = serviceTier === 'Free' ? 'Free Service' : (serviceTier === 'Starter' ? 'Starter Service' : (serviceTier === 'Professional' ? 'Pro Service' : 'Enterprise Service'));
             document.getElementById('content_badge').textContent = contentTier === 'Free' ? 'Free CMS' : (contentTier === 'Starter' ? '+1 Core Seat' : (contentTier === 'Professional' ? '+3 Core Seats' : '+5 Core Seats'));
+            document.getElementById('data_badge').textContent = dataTier === 'Free' ? 'Free Tools' : (dataTier === 'Starter' ? '+1 Core Seat' : (dataTier === 'Professional' ? 'Pro Datasets' : 'Enterprise Ops'));
+            document.getElementById('revenue_badge').textContent = revTier === 'Free' ? 'Free Tools' : (revTier === 'Professional' ? 'Pro CPQ' : 'Enterprise CPQ');
+            document.getElementById('crm_badge').textContent = crmTier === 'Free' ? 'Included ₹0' : `${crmTier} Suite`;
         }
 
         async function runAudit(e) {
@@ -251,6 +346,9 @@ INDEX_HTML = """<!DOCTYPE html>
             const contentTier = document.getElementById('plan_content').value;
             const salesTier = document.getElementById('plan_sales').value;
             const serviceTier = document.getElementById('plan_service').value;
+            const dataTier = document.getElementById('plan_data').value;
+            const revTier = document.getElementById('plan_revenue').value;
+            const crmTier = document.getElementById('plan_crm').value;
 
             const hasDiscounts = document.getElementById('applyDiscounts').checked;
 
@@ -289,7 +387,11 @@ INDEX_HTML = """<!DOCTYPE html>
                     'Sales Hub': salesTier,
                     'Service Hub': serviceTier,
                     'Content Hub': contentTier,
-                    'Data Hub': 'Free'
+                    'Data Hub': dataTier,
+                    'Commerce Hub': revTier,
+                    'Revenue Hub': revTier,
+                    'Smart CRM': crmTier,
+                    'Platform-wide': crmTier
                 },
                 contract_info: contractInfo
             };
@@ -376,7 +478,39 @@ class AuditServerHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path == "/api/audit":
+        if parsed.path == "/api/detect":
+            content_len = int(self.headers.get("Content-Length", 0))
+            post_body = self.rfile.read(content_len)
+            try:
+                req_data = json.loads(post_body.decode("utf-8"))
+                token = req_data.get("token")
+                collector = HubSpotCollector(token)
+                acc = collector.collect_account_info()
+                seats = collector.collect_users_and_seats()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    "success": True,
+                    "portal_id": acc.get("portal_id"),
+                    "company_name": acc.get("company_name"),
+                    "detected_sales_tier": seats.get("detected_sales_tier"),
+                    "detected_service_tier": seats.get("detected_service_tier"),
+                    "detected_revenue_tier": seats.get("detected_revenue_tier"),
+                    "paid_sales_seats": seats.get("paid_sales_seats", 0),
+                    "paid_service_seats": seats.get("paid_service_seats", 0),
+                    "paid_revenue_seats": seats.get("paid_revenue_seats", 0),
+                    "core_seats_used": seats.get("core_seats_used", 0),
+                    "total_users": seats.get("total_users", 0)
+                }).encode("utf-8"))
+            except Exception as e:
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode("utf-8"))
+            return
+
+        elif parsed.path == "/api/audit":
             content_len = int(self.headers.get("Content-Length", 0))
             post_body = self.rfile.read(content_len)
             try:
