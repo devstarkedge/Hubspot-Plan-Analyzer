@@ -6,7 +6,7 @@ Provides a modern web dashboard on http://localhost:8080 with live token scannin
 import sys
 import os
 import json
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -318,7 +318,14 @@ INDEX_HTML = """<!DOCTYPE html>
 class AuditServerHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed = urlparse(self.path)
-        if parsed.path == "/" or parsed.path == "/index.html":
+        if parsed.path in ["/health", "/healthz", "/ping"]:
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("Cache-Control", "no-cache")
+            self.end_headers()
+            self.wfile.write(b"OK")
+
+        elif parsed.path == "/" or parsed.path == "/index.html":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
@@ -332,9 +339,32 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                 with open(LATEST_REPORT_PATH, "rb") as f:
                     self.wfile.write(f.read())
             else:
-                self.send_response(404)
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.end_headers()
-                self.wfile.write(b"No report generated yet. Run an audit first!")
+                fallback_html = """<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>No Report Generated</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #0f172a; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .box { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px; text-align: center; max-width: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h2 { margin-bottom: 12px; }
+        p { color: #64748b; margin-bottom: 24px; font-size: 15px; }
+        a { display: inline-block; background: #ff5c35; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        a:hover { background: #e0441e; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>No Audit Report Generated Yet</h2>
+        <p>Please connect your HubSpot Private App token and select your plans to run a live portal audit.</p>
+        <a href="/">Go to Portal Analyzer</a>
+    </div>
+</body>
+</html>"""
+                self.wfile.write(fallback_html.encode("utf-8"))
 
         else:
             self.send_response(404)
@@ -383,18 +413,24 @@ class AuditServerHandler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
 
-def run_server(port: int = 8080):
-    server_address = ('', port)
-    httpd = HTTPServer(server_address, AuditServerHandler)
-    print(f"==================================================================")
-    print(f" HubSpot Plan Analyzer Web Server Running on: http://localhost:{port}")
-    print(f" Open http://localhost:{port} in your browser to run portal scans!")
-    print(f" Press Ctrl+C to stop.")
-    print(f"==================================================================")
-    httpd.serve_forever()
+def run_server(port: int = None, host: str = "0.0.0.0"):
+    if port is None:
+        port = int(os.environ.get("PORT", sys.argv[1] if len(sys.argv) > 1 and sys.argv[1].isdigit() else 8080))
+    server_address = (host, port)
+    httpd = ThreadingHTTPServer(server_address, AuditServerHandler)
+    print("==================================================================")
+    print(f" HubSpot Plan Analyzer Web Server Running on: http://{host}:{port}")
+    print(f" Listening on {host}:{port} (PORT env={os.environ.get('PORT', 'default 8080')})")
+    print(" Press Ctrl+C to stop.")
+    print("==================================================================")
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\nShutting down server...")
+        httpd.server_close()
 
 if __name__ == "__main__":
-    port = 8080
+    port_arg = None
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
-        port = int(sys.argv[1])
-    run_server(port)
+        port_arg = int(sys.argv[1])
+    run_server(port=port_arg)
