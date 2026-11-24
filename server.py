@@ -6,6 +6,8 @@ Provides a modern web dashboard on http://localhost:8080 with live token scannin
 import sys
 import os
 import json
+import re
+import time
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
 
@@ -22,6 +24,8 @@ CATALOG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "HubSpot
 catalog = HubSpotCatalog(CATALOG_PATH)
 analyzer = PlanAnalyzer(catalog)
 LATEST_REPORT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hubspot_audit_report.html")
+REPORTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+os.makedirs(REPORTS_DIR, exist_ok=True)
 
 INDEX_HTML = """<!DOCTYPE html>
 <html lang="en">
@@ -150,6 +154,18 @@ INDEX_HTML = """<!DOCTYPE html>
                 <strong>Active Master Catalog:</strong> 176 Features &bull; Official India INR Rates &bull; Updated 29 Oct 2026
             </div>
             <span style="font-weight: 600; font-size: 12px; background: white; padding: 4px 10px; border-radius: 6px;">7 Hubs Covered</span>
+        </div>
+
+        <!-- Saved Reports Quick Access -->
+        <div id="recentReportsContainer" style="display: none; margin-bottom: 24px; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 16px;">📁</span>
+                    <strong style="font-size: 14px; color: #1e293b;">Previously Audited Portals &amp; Unique Reports</strong>
+                </div>
+                <span id="reportCountBadge" style="font-size: 11px; background: #f1f5f9; color: #475569; padding: 2px 8px; border-radius: 10px; font-weight: 700;"></span>
+            </div>
+            <div id="recentReportsList" style="display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
 
         <div class="card">
@@ -654,7 +670,7 @@ INDEX_HTML = """<!DOCTYPE html>
                 const res = await resp.json();
                 if (res.success) {
                     resetLoadingState();
-                    window.location.href = '/report';
+                    window.location.href = res.report_url || '/report';
                 } else {
                     alert('Audit Error: ' + (res.error || 'Failed to analyze portal'));
                     submitBtn.style.display = 'flex';
@@ -667,7 +683,35 @@ INDEX_HTML = """<!DOCTYPE html>
             }
         }
 
+        async function loadRecentReports() {
+            try {
+                const resp = await fetch('/api/reports');
+                const data = await resp.json();
+                if (data.success && data.reports && data.reports.length > 0) {
+                    const container = document.getElementById('recentReportsContainer');
+                    const list = document.getElementById('recentReportsList');
+                    const badge = document.getElementById('reportCountBadge');
+                    if (container && list) {
+                        container.style.display = 'block';
+                        if (badge) badge.textContent = `${data.reports.length} Portals Audited`;
+                        list.innerHTML = data.reports.slice(0, 5).map(r => `
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 13px;">
+                                <div>
+                                    <strong style="color: #0f172a;">${r.company_name}</strong> <span style="color: #64748b;">(Portal ${r.portal_id || 'N/A'})</span>
+                                    <span style="font-size: 11px; color: #94a3b8; margin-left: 8px;">${r.date_str}</span>
+                                </div>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <a href="${r.url}" target="_blank" style="background: white; border: 1px solid #cbd5e1; color: #ff5c35; font-weight: 600; padding: 4px 10px; border-radius: 6px; text-decoration: none; font-size: 12px; display: inline-flex; align-items: center; gap: 4px;">Open Report ↗</a>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                }
+            } catch(e) {}
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            loadRecentReports();
             const token = document.getElementById('token').value.trim();
             if (token && token.length >= 15) {
                 autoDetectPortal();
@@ -675,12 +719,45 @@ INDEX_HTML = """<!DOCTYPE html>
                 setPlansLocked(true);
             }
         });
+        window.addEventListener('pageshow', function() {
+            loadRecentReports();
+        });
     </script>
 </body>
 </html>
 """
 
 class AuditServerHandler(BaseHTTPRequestHandler):
+    def _send_no_report_page(self, custom_msg: str = None):
+        self.send_response(404 if custom_msg else 200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+        title = "Report Not Found" if custom_msg else "No Audit Report Generated Yet"
+        body_msg = custom_msg or "Please connect your HubSpot Private App token and select your plans to run a live portal audit."
+        fallback_html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{title}</title>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #0f172a; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }}
+        .box {{ background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px; text-align: center; max-width: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }}
+        h2 {{ margin-bottom: 12px; }}
+        p {{ color: #64748b; margin-bottom: 24px; font-size: 15px; }}
+        a {{ display: inline-block; background: #ff5c35; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }}
+        a:hover {{ background: #e0441e; }}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>{title}</h2>
+        <p>{body_msg}</p>
+        <a href="/">Go to Portal Analyzer</a>
+    </div>
+</body>
+</html>"""
+        self.wfile.write(fallback_html.encode("utf-8"))
+
     def do_GET(self):
         parsed = urlparse(self.path)
         if parsed.path in ["/health", "/healthz", "/ping"]:
@@ -696,7 +773,42 @@ class AuditServerHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(INDEX_HTML.encode("utf-8"))
 
-        elif parsed.path == "/report":
+        elif parsed.path == "/api/reports":
+            reports = []
+            seen_portals = set()
+            if os.path.isdir(REPORTS_DIR):
+                file_list = [f for f in os.listdir(REPORTS_DIR) if f.endswith(".html")]
+                file_list.sort(key=lambda x: os.path.getmtime(os.path.join(REPORTS_DIR, x)), reverse=True)
+                for f in file_list:
+                    fpath = os.path.join(REPORTS_DIR, f)
+                    mtime = os.path.getmtime(fpath)
+                    rid = f[:-5]
+                    parts = rid.split("-")
+                    portal_id = parts[-1] if len(parts) > 1 and parts[-1].isdigit() else ""
+                    if not portal_id and len(parts) > 2 and parts[-2].isdigit():
+                        portal_id = parts[-2]
+                    
+                    comp_name = parts[0].replace("_", " ").title() if len(parts) > 0 else "Portal"
+                    p_key = portal_id if portal_id else rid
+                    if p_key in seen_portals:
+                        continue
+                    seen_portals.add(p_key)
+
+                    reports.append({
+                        "report_id": rid,
+                        "url": f"/report/{rid}",
+                        "company_name": comp_name,
+                        "portal_id": portal_id,
+                        "timestamp": mtime,
+                        "date_str": time.strftime("%Y-%m-%d %H:%M", time.localtime(mtime))
+                    })
+
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"success": True, "reports": reports}).encode("utf-8"))
+
+        elif parsed.path in ["/report", "/report/"]:
             if os.path.exists(LATEST_REPORT_PATH):
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -704,32 +816,32 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                 with open(LATEST_REPORT_PATH, "rb") as f:
                     self.wfile.write(f.read())
             else:
+                self._send_no_report_page()
+
+        elif parsed.path.startswith("/report/"):
+            report_slug = parsed.path[len("/report/"):].strip("/")
+            if report_slug.endswith(".html"):
+                report_slug = report_slug[:-5]
+
+            report_file = None
+            cand = os.path.join(REPORTS_DIR, f"{report_slug}.html")
+            if os.path.isfile(cand):
+                report_file = cand
+            else:
+                if os.path.isdir(REPORTS_DIR):
+                    matches = [f for f in os.listdir(REPORTS_DIR) if f.endswith(".html") and report_slug in f]
+                    if matches:
+                        matches.sort(key=lambda x: os.path.getmtime(os.path.join(REPORTS_DIR, x)), reverse=True)
+                        report_file = os.path.join(REPORTS_DIR, matches[0])
+
+            if report_file and os.path.isfile(report_file):
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.end_headers()
-                fallback_html = """<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>No Report Generated</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #0f172a; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .box { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px; text-align: center; max-width: 480px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        h2 { margin-bottom: 12px; }
-        p { color: #64748b; margin-bottom: 24px; font-size: 15px; }
-        a { display: inline-block; background: #ff5c35; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
-        a:hover { background: #e0441e; }
-    </style>
-</head>
-<body>
-    <div class="box">
-        <h2>No Audit Report Generated Yet</h2>
-        <p>Please connect your HubSpot Private App token and select your plans to run a live portal audit.</p>
-        <a href="/">Go to Portal Analyzer</a>
-    </div>
-</body>
-</html>"""
-                self.wfile.write(fallback_html.encode("utf-8"))
+                with open(report_file, "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self._send_no_report_page(custom_msg=f"Audit report for '{report_slug}' not found.")
 
         else:
             self.send_response(404)
@@ -853,10 +965,33 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                 rg = ReportGenerator(audit_result)
                 rg.generate_html(LATEST_REPORT_PATH)
 
+                # Generate permanent account-specific report URL
+                portal_id = str(audit_result.get("account", {}).get("portal_id", "portal"))
+                company_name = audit_result.get("account", {}).get("company_name", "account")
+                clean_slug = re.sub(r'[^a-zA-Z0-9]+', '-', company_name.lower()).strip('-') or "portal"
+
+                # Permanent account report ID: e.g. "geciproducts-50849936"
+                report_id = f"{clean_slug}-{portal_id}"
+                unique_report_path = os.path.join(REPORTS_DIR, f"{report_id}.html")
+                rg.generate_html(unique_report_path)
+
+                # Also save a timestamped archive snapshot, e.g. "geciproducts-50849936-20261124_172030.html"
+                time_tag = time.strftime("%Y%m%d_%H%M%S")
+                archive_path = os.path.join(REPORTS_DIR, f"{clean_slug}-{portal_id}-{time_tag}.html")
+                rg.generate_html(archive_path)
+
+                report_url = f"/report/{report_id}"
+
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()
-                self.wfile.write(json.dumps({"success": True}).encode("utf-8"))
+                self.wfile.write(json.dumps({
+                    "success": True,
+                    "report_id": report_id,
+                    "report_url": report_url,
+                    "company_name": company_name,
+                    "portal_id": portal_id
+                }).encode("utf-8"))
             except Exception as e:
                 self.send_response(500)
                 self.send_header("Content-Type", "application/json")

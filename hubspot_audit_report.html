@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HubSpot Plan & Feature Utilization Audit | Geciproducts</title>
+    <title>HubSpot Plan & Feature Utilization Audit | Starkedge</title>
     <style>
         :root {
             --primary: #ff5c35;
@@ -476,13 +476,14 @@
         <div class="header">
             <div>
                 <h1>HubSpot Plan &amp; Feature Utilization Audit</h1>
-                <p>Portal: <strong>Geciproducts</strong> (Portal ID: 50849936) &bull; Currency: <strong>USD</strong> (Benchmarked against INR Master Catalog) &bull; Generated: 2026-11-24 17:05:43</p>
+                <p>Portal: <strong>Starkedge</strong> (Portal ID: 245317936) &bull; Currency: <strong>USD</strong> (Benchmarked against INR Master Catalog) &bull; Generated: 2026-11-24 17:22:27</p>
                 <div class="plans-bar">
-                    <span class="plan-chip"><strong>Marketing Hub:</strong> Professional</span> <span class="plan-chip"><strong>Sales Hub:</strong> Free</span> <span class="plan-chip"><strong>Service Hub:</strong> Free</span> <span class="plan-chip"><strong>Content Hub:</strong> Free</span> <span class="plan-chip"><strong>Data Hub:</strong> Free</span> <span class="plan-chip"><strong>Commerce Hub:</strong> Free</span> <span class="plan-chip"><strong>Revenue Hub:</strong> Free</span> <span class="plan-chip"><strong>Smart CRM:</strong> Free</span> <span class="plan-chip"><strong>Platform-wide:</strong> Free</span>
+                    <span class="plan-chip"><strong>Marketing Hub:</strong> Starter</span> <span class="plan-chip"><strong>Sales Hub:</strong> Professional</span> <span class="plan-chip"><strong>Service Hub:</strong> Professional</span> <span class="plan-chip"><strong>Content Hub:</strong> Professional</span>
                 </div>
             </div>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                 <a href="/" class="btn-print" style="text-decoration: none; background: white; color: #334155; border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 6px;">← Back to Analyzer</a>
+                <button onclick="copyShareLink(this)" class="btn-print" style="background: white; color: #2563eb; border: 1px solid #93c5fd; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">🔗 Copy Share Link</button>
                 <button onclick="window.print()" class="btn-print">Print / Save PDF</button>
             </div>
         </div>
@@ -491,8 +492,8 @@
         <div class="metrics-grid">
             <div class="metric-card">
                 <div class="title">Current Monthly Spend</div>
-                <div class="value">₹74,200</div>
-                <div class="sub">Quarterly: ₹222,600 &bull; Est. Annual: ₹890,400</div>
+                <div class="value">₹58,364</div>
+                <div class="sub">Quarterly: ₹175,092 &bull; Est. Annual: ₹700,368</div>
             </div>
             <div class="metric-card">
                 <div class="title">Wasted Monthly Spend</div>
@@ -501,8 +502,8 @@
             </div>
             <div class="metric-card">
                 <div class="title">Feature Adoption Rate</div>
-                <div class="value val-warning">50.4%</div>
-                <div class="sub">🟢 65 Used &bull; 🔴 18 Shelfware &bull; 🟡 46 Unverified</div>
+                <div class="value val-warning">64.6%</div>
+                <div class="sub">🟢 82 Used &bull; 🔴 16 Shelfware &bull; 🟡 29 Unverified</div>
             </div>
             
             <div class="metric-card">
@@ -516,12 +517,12 @@
         <div class="summary-strip">
             <div>
                 <div class="summary-item-label">Sales Seats (Professional)</div>
-                <div class="summary-item-val" style="color: #15803d;">0 / 0 Full</div>
+                <div class="summary-item-val" style="color: #15803d;">1 / 1 Full</div>
                 <div class="summary-item-sub">100% assigned &bull; 0 empty seats</div>
             </div>
             <div>
                 <div class="summary-item-label">Service Seats (Professional)</div>
-                <div class="summary-item-val" style="color: #15803d;">0 / 0 Full</div>
+                <div class="summary-item-val" style="color: #15803d;">1 / 1 Full</div>
                 <div class="summary-item-sub">100% assigned &bull; 0 empty seats</div>
             </div>
             <div>
@@ -537,17 +538,17 @@
             </div>
             <div>
                 <div class="summary-item-label">Marketing Contacts</div>
-                <div class="summary-item-val" style="color: #15803d;">6,409 / 7,000 (91.6%)</div>
-                <div class="summary-item-sub">591 contacts headroom buffer</div>
+                <div class="summary-item-val" style="color: #15803d;">67 / 1,000 (6.7%)</div>
+                <div class="summary-item-sub">933 contacts headroom buffer</div>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab('summary')">Executive Summary &amp; ROI</button>
-            <button class="tab-btn" onclick="openTab('matrix')">Full Feature Matrix (129 in-plan)</button>
+            <button class="tab-btn" onclick="openTab('matrix')">Full Feature Matrix (127 in-plan)</button>
             <button class="tab-btn" onclick="openTab('downgrades')">Downgrade Risk Simulation (1)</button>
-            <button class="tab-btn" onclick="openTab('recs')">Optimization Recommendations (0)</button>
+            <button class="tab-btn" onclick="openTab('recs')">Optimization Recommendations (1)</button>
         </div>
 
         <!-- Tab 1: Executive Summary -->
@@ -567,10 +568,31 @@
                         <tbody>
                             
             <tr>
-                <td><strong>Marketing Hub (Professional Base)</strong></td>
+                <td><strong>Marketing Hub (Starter Base)</strong></td>
                 <td>Flat Base Plan</td>
-                <td class="amount">₹74,200</td>
-                <td class="amount">₹800,364</td>
+                <td class="amount">₹1,670</td>
+                <td class="amount">₹7,020</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Sales Hub (Professional - 1 seats)</strong></td>
+                <td>Per-Seat (List Catalog)</td>
+                <td class="amount">₹7,497</td>
+                <td class="amount">₹89,964</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Service Hub (Professional - 1 seats)</strong></td>
+                <td>Per-Seat (List Catalog)</td>
+                <td class="amount">₹7,497</td>
+                <td class="amount">₹89,964</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Content Hub (Professional Base)</strong></td>
+                <td>Flat Base Plan</td>
+                <td class="amount">₹41,700</td>
+                <td class="amount">₹500,400</td>
             </tr>
             
                         </tbody>
@@ -581,6 +603,22 @@
             <div class="card">
                 <h2>Top Recommended Cost Optimizations</h2>
                 
+            <div class="card rec-card">
+                <div class="rec-header">
+                    <div>
+                        <span class="prio-tag prio-medium">MEDIUM PRIORITY</span>
+                        <span class="cat-pill">AI & Credits Adoption</span>
+                        <h3 style="margin-top: 8px;">Utilize 3,000 Monthly AI Credits (100% Currently Expiring Wasted)</h3>
+                    </div>
+                    
+                </div>
+                <p style="color: #4b5563; font-size: 15px; margin: 12px 0;">Your plan includes 3,000 monthly HubSpot AI credits (for Breeze AI Assistant, Prospecting Agents, and Content Remix), but your team has used only 0 credits (0.0%). These credits do not roll over and reset every billing cycle.</p>
+                <div class="steps-box">
+                    <strong>Implementation Steps:</strong>
+                    <ol><li>Train sales reps to use Breeze AI for email drafting and CRM record summaries.</li><li>Use Content Hub Pro AI Content Remix to turn 1 blog post into social posts, emails, and landing page copy.</li><li>Explore Agent Hub features in Marketing/Sales before your next credit reset on Monthly Renewal.</li></ol>
+                </div>
+            </div>
+            
             </div>
         </div>
 
@@ -701,10 +739,10 @@
 
                     <div class="status-chips">
                         <button class="status-chip active" data-status="ALL" onclick="setStatusChip('ALL')">All <span class="chip-num" id="countAll">176</span></button>
-                        <button class="status-chip chip-used" data-status="USED" onclick="setStatusChip('USED')">🟢 Used <span class="chip-num" id="countUsed">65</span></button>
-                        <button class="status-chip chip-shelfware" data-status="SHELFWARE" onclick="setStatusChip('SHELFWARE')">🔴 Shelfware <span class="chip-num" id="countShelfware">18</span></button>
-                        <button class="status-chip chip-unverified" data-status="UNVERIFIED" onclick="setStatusChip('UNVERIFIED')">🟡 Unverified <span class="chip-num" id="countUnverified">46</span></button>
-                        <button class="status-chip chip-locked" data-status="LOCKED" onclick="setStatusChip('LOCKED')">🔒 Locked <span class="chip-num" id="countLocked">47</span></button>
+                        <button class="status-chip chip-used" data-status="USED" onclick="setStatusChip('USED')">🟢 Used <span class="chip-num" id="countUsed">82</span></button>
+                        <button class="status-chip chip-shelfware" data-status="SHELFWARE" onclick="setStatusChip('SHELFWARE')">🔴 Shelfware <span class="chip-num" id="countShelfware">16</span></button>
+                        <button class="status-chip chip-unverified" data-status="UNVERIFIED" onclick="setStatusChip('UNVERIFIED')">🟡 Unverified <span class="chip-num" id="countUnverified">29</span></button>
+                        <button class="status-chip chip-locked" data-status="LOCKED" onclick="setStatusChip('LOCKED')">🔒 Locked <span class="chip-num" id="countLocked">49</span></button>
                         <span class="results-count" id="resultsCount">Showing 176 features</span>
                     </div>
                 </div>
@@ -723,13 +761,13 @@
                         </thead>
                         <tbody id="featuresBody">
                             
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Starter" data-name="agent builder" data-cat="agent hub">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Starter" data-name="agent builder" data-cat="agent hub">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Agent Hub</span></td>
                     <td class="col-feat"><strong>Agent Builder</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Enterprise" data-name="prospecting agent" data-cat="agent hub">
@@ -741,22 +779,22 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="nurture agent (beta)" data-cat="agent hub">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="nurture agent (beta)" data-cat="agent hub">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Agent Hub</span></td>
                     <td class="col-feat"><strong>Nurture Agent (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="content agent (beta)" data-cat="agent hub">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="content agent (beta)" data-cat="agent hub">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Agent Hub</span></td>
                     <td class="col-feat"><strong>Content Agent (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Enterprise" data-name="customer agent" data-cat="agent hub">
@@ -768,13 +806,13 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="answer engine optimization (beta)" data-cat="aeo">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="answer engine optimization (beta)" data-cat="aeo">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">AEO</span></td>
                     <td class="col-feat"><strong>Answer Engine Optimization (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="seo recommendations & optimizations" data-cat="seo">
@@ -786,22 +824,22 @@
                     <td class="usage-note note-unverified">No complete public SEO recommendations API confirmed in HubSpot</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="ad management" data-cat="ads">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="ad management" data-cat="ads">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Ads</span></td>
                     <td class="col-feat"><strong>Ad management</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="ad retargeting" data-cat="ads">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="ad retargeting" data-cat="ads">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Ads</span></td>
                     <td class="col-feat"><strong>Ad retargeting</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Starter" data-name="simple ad automation" data-cat="ads">
@@ -810,16 +848,16 @@
                     <td class="col-feat"><strong>Simple ad automation</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="usage-note note-used">Active: 9 active workflows (15 total in portal)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="ad conversion events" data-cat="ads">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="ad conversion events" data-cat="ads">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Ads</span></td>
                     <td class="col-feat"><strong>Ad conversion events</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Starter" data-name="crm segments" data-cat="segments">
@@ -828,142 +866,142 @@
                     <td class="col-feat"><strong>CRM segments</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7,753 contacts & CRM records actively managed</td>
+                    <td class="usage-note note-used">Active: 5,994 contacts & CRM records actively managed</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="filter insights in segments (beta)" data-cat="segments">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="filter insights in segments (beta)" data-cat="segments">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Segments</span></td>
                     <td class="col-feat"><strong>Filter insights in segments (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="segment analytics (beta)" data-cat="segments">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="segment analytics (beta)" data-cat="segments">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Segments</span></td>
                     <td class="col-feat"><strong>Segment analytics (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="web visitor segments (beta)" data-cat="segments">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="web visitor segments (beta)" data-cat="segments">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Segments</span></td>
                     <td class="col-feat"><strong>Web visitor segments (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="ai segment suggestions (beta)" data-cat="segments">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="ai segment suggestions (beta)" data-cat="segments">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Segments</span></td>
                     <td class="col-feat"><strong>AI Segment Suggestions (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="lookalike segments (beta)" data-cat="segments">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="lookalike segments (beta)" data-cat="segments">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Segments</span></td>
                     <td class="col-feat"><strong>Lookalike Segments (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="SHELFWARE" data-tier="Free" data-name="live chat" data-cat="conversations">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="live chat" data-cat="conversations">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversations</span></td>
                     <td class="col-feat"><strong>Live chat</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">API Verified: 0 conversation threads recorded in Help Desk</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="conversational bots" data-cat="conversations">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="conversational bots" data-cat="conversations">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversations</span></td>
                     <td class="col-feat"><strong>Conversational bots</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="SHELFWARE" data-tier="Free" data-name="facebook messenger integration" data-cat="conversations">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="facebook messenger integration" data-cat="conversations">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversations</span></td>
                     <td class="col-feat"><strong>Facebook Messenger integration</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">API Verified: 0 conversation threads recorded in Help Desk</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="SHELFWARE" data-tier="Professional" data-name="draggable chat widget" data-cat="conversations">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="draggable chat widget" data-cat="conversations">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversations</span></td>
                     <td class="col-feat"><strong>Draggable chat widget</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">API Verified: 0 conversation threads recorded in Help Desk</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="logged-in visitor identification" data-cat="conversations">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="logged-in visitor identification" data-cat="conversations">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversations</span></td>
                     <td class="col-feat"><strong>Logged-in visitor identification</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">Chat widget JS embed setting (no dedicated server API)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="SHELFWARE" data-tier="Professional" data-name="whatsapp integration" data-cat="conversations">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="whatsapp integration" data-cat="conversations">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversations</span></td>
                     <td class="col-feat"><strong>WhatsApp integration</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">API Verified: 0 conversation threads recorded in Help Desk</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="ctas" data-cat="conversion">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="ctas" data-cat="conversion">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Conversion</span></td>
                     <td class="col-feat"><strong>CTAs</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="social media publishing" data-cat="social">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="social media publishing" data-cat="social">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Social</span></td>
                     <td class="col-feat"><strong>Social media publishing</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="social media approvals" data-cat="social">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="social media approvals" data-cat="social">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Social</span></td>
                     <td class="col-feat"><strong>Social media approvals</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="SHELFWARE" data-tier="Professional" data-name="lead scoring" data-cat="scoring">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="lead scoring" data-cat="scoring">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Scoring</span></td>
                     <td class="col-feat"><strong>Lead scoring</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">API Verified: No active lead scoring model configured</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Enterprise" data-name="multi-account management" data-cat="governance">
@@ -975,13 +1013,13 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="email marketing" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="email marketing" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Email marketing</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="email automation" data-cat="email">
@@ -990,43 +1028,43 @@
                     <td class="col-feat"><strong>Email automation</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="usage-note note-used">Active: 9 active workflows (15 total in portal)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="email health reporting" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="email health reporting" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Email health reporting</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="messaging insights (beta)" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="messaging insights (beta)" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Messaging Insights (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="a/b testing" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="a/b testing" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>A/B testing</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="smart content for marketing email" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="smart content for marketing email" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Smart content for marketing email</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated configuration API confirmed in HubSpot (verify in Page/Email editor)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="advanced personalization" data-cat="email">
@@ -1038,22 +1076,22 @@
                     <td class="usage-note note-unverified">No dedicated configuration API confirmed in HubSpot (verify in Page/Email editor)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="programmable email" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="programmable email" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Programmable email</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="ai email template upload (beta)" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="ai email template upload (beta)" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>AI email template upload (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Enterprise" data-name="email approvals" data-cat="email">
@@ -1065,22 +1103,22 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="marketing email single-send api" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="marketing email single-send api" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Marketing email single-send API</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="email send-time optimization (beta)" data-cat="email">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="email send-time optimization (beta)" data-cat="email">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Email</span></td>
                     <td class="col-feat"><strong>Email send-time optimization (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="cookie management tools" data-cat="privacy">
@@ -1101,40 +1139,40 @@
                     <td class="usage-note note-used">Active: Standard CRM performance reporting dashboards active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="website traffic analytics" data-cat="reporting">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="website traffic analytics" data-cat="reporting">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Reporting</span></td>
                     <td class="col-feat"><strong>Website traffic analytics</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Professional" data-name="custom reporting" data-cat="reporting">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="custom reporting" data-cat="reporting">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Reporting</span></td>
                     <td class="col-feat"><strong>Custom reporting</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: Custom CRM reporting tool active in tier</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="seo analytics" data-cat="reporting">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="seo analytics" data-cat="reporting">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Reporting</span></td>
                     <td class="col-feat"><strong>SEO analytics</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="google search console integration" data-cat="reporting">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="google search console integration" data-cat="reporting">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Reporting</span></td>
                     <td class="col-feat"><strong>Google Search Console integration</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Enterprise" data-name="multi-touch revenue attribution" data-cat="attribution">
@@ -1155,40 +1193,40 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="marketing studio (beta)" data-cat="campaigns">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="marketing studio (beta)" data-cat="campaigns">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Campaigns</span></td>
                     <td class="col-feat"><strong>Marketing Studio (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="campaign agent" data-cat="campaigns">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="campaign agent" data-cat="campaigns">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Campaigns</span></td>
                     <td class="col-feat"><strong>Campaign Agent</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Free" data-name="campaign management" data-cat="campaigns">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Free" data-name="campaign management" data-cat="campaigns">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Campaigns</span></td>
                     <td class="col-feat"><strong>Campaign management</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Core starter capability active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="campaign reporting" data-cat="campaigns">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="campaign reporting" data-cat="campaigns">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Campaigns</span></td>
                     <td class="col-feat"><strong>Campaign reporting</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Starter" data-name="hubspot work (beta)" data-cat="work management">
@@ -1200,22 +1238,22 @@
                     <td class="usage-note note-unverified">No dedicated feature-usage API confirmed in HubSpot</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="SHELFWARE" data-tier="Professional" data-name="video creation & editing" data-cat="video">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="video creation & editing" data-cat="video">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Video</span></td>
                     <td class="col-feat"><strong>Video creation & editing</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">Partial Telemetry: 0 native video files hosted in File Manager (external embedded videos require manual check)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="USED" data-tier="Professional" data-name="omni-channel marketing automation" data-cat="automation">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="omni-channel marketing automation" data-cat="automation">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Automation</span></td>
                     <td class="col-feat"><strong>Omni-channel marketing automation</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Enterprise" data-name="custom events" data-cat="events">
@@ -1227,13 +1265,13 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Marketing Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="event visualizer" data-cat="events">
+                <tr class="feat-row" data-hub="Marketing Hub" data-status="LOCKED" data-tier="Professional" data-name="event visualizer" data-cat="events">
                     <td class="col-hub"><span class="hub-pill hub-marketing-hub">Marketing Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Events</span></td>
                     <td class="col-feat"><strong>Event Visualizer</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
+                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
+                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Free" data-name="contacts, companies, deals and tasks" data-cat="crm">
@@ -1242,7 +1280,7 @@
                     <td class="col-feat"><strong>Contacts, companies, deals and tasks</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7,753 contacts & CRM records actively managed</td>
+                    <td class="usage-note note-used">Active: 5,994 contacts & CRM records actively managed</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Free" data-name="1-to-1 email" data-cat="email">
@@ -1287,7 +1325,7 @@
                     <td class="col-feat"><strong>Deal pipelines</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 1 deal pipelines configured</td>
+                    <td class="usage-note note-used">Active: 5 deal pipelines configured</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Free" data-name="sales automation/workflows" data-cat="automation">
@@ -1296,34 +1334,34 @@
                     <td class="col-feat"><strong>Sales automation/workflows</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="usage-note note-used">Active: 9 active workflows (15 total in portal)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="SHELFWARE" data-tier="Free" data-name="sales sequences" data-cat="sequences">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Free" data-name="sales sequences" data-cat="sequences">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Sequences</span></td>
                     <td class="col-feat"><strong>Sales sequences</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
-                    <td class="usage-note note-shelfware">API Verified: 0 sales sequences created</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 43 sales sequences created</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Starter" data-name="prospecting agent" data-cat="prospecting">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="SHELFWARE" data-tier="Starter" data-name="prospecting agent" data-cat="prospecting">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Prospecting</span></td>
                     <td class="col-feat"><strong>Prospecting Agent</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">Partial Telemetry: 0 lead records in Prospecting workspace (verify AI agent rules in Agent Hub)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Professional" data-name="lead scoring" data-cat="scoring">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="SHELFWARE" data-tier="Professional" data-name="lead scoring" data-cat="scoring">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Scoring</span></td>
                     <td class="col-feat"><strong>Lead scoring</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: No active lead scoring model configured</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="UNVERIFIED" data-tier="Free" data-name="sales forecasting" data-cat="forecasting">
@@ -1344,13 +1382,13 @@
                     <td class="usage-note note-unverified">No dedicated public Goals API confirmed in HubSpot (verify in Settings/Goals)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Professional" data-name="sales playbooks" data-cat="playbooks">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="sales playbooks" data-cat="playbooks">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Playbooks</span></td>
                     <td class="col-feat"><strong>Sales playbooks</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public Playbooks API confirmed in HubSpot (verify in Settings/Playbooks)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Free" data-name="calling minutes" data-cat="calling">
@@ -1359,7 +1397,7 @@
                     <td class="col-feat"><strong>Calling minutes</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 2 calling engagements recorded in CRM</td>
+                    <td class="usage-note note-used">Active: 211 calling engagements recorded in CRM</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="SHELFWARE" data-tier="Free" data-name="quotes / quote management" data-cat="quotes">
@@ -1398,22 +1436,22 @@
                     <td class="usage-note note-used">8 users active in portal</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Starter" data-name="hubspot-provided phone numbers" data-cat="calls">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Starter" data-name="hubspot-provided phone numbers" data-cat="calls">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Calls</span></td>
                     <td class="col-feat"><strong>HubSpot-provided phone numbers</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 211 calling engagements recorded in CRM</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Professional" data-name="call transcription and coaching" data-cat="calls">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Professional" data-name="call transcription and coaching" data-cat="calls">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Calls</span></td>
                     <td class="col-feat"><strong>Call transcription and coaching</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 211 calling engagements recorded in CRM</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Free" data-name="reporting dashboard" data-cat="reporting">
@@ -1425,13 +1463,13 @@
                     <td class="usage-note note-used">Active: Standard CRM performance reporting dashboards active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Professional" data-name="custom reporting" data-cat="reporting">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="USED" data-tier="Professional" data-name="custom reporting" data-cat="reporting">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Reporting</span></td>
                     <td class="col-feat"><strong>Custom reporting</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: Custom CRM reporting tool active in tier</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Enterprise" data-name="deal journey analytics" data-cat="reporting">
@@ -1452,13 +1490,13 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Sales Hub" data-status="LOCKED" data-tier="Starter" data-name="hubspot work (beta)" data-cat="agents">
+                <tr class="feat-row" data-hub="Sales Hub" data-status="UNVERIFIED" data-tier="Starter" data-name="hubspot work (beta)" data-cat="agents">
                     <td class="col-hub"><span class="hub-pill hub-sales-hub">Sales Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Agents</span></td>
                     <td class="col-feat"><strong>HubSpot Work (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated feature-usage API confirmed in HubSpot</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="tickets and ticket pipelines" data-cat="ticketing">
@@ -1476,7 +1514,7 @@
                     <td class="col-feat"><strong>Help desk workspace</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="shared inbox and team email" data-cat="inbox">
@@ -1485,7 +1523,7 @@
                     <td class="col-feat"><strong>Shared inbox and team email</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="live chat" data-cat="chat">
@@ -1494,16 +1532,16 @@
                     <td class="col-feat"><strong>Live chat</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="conversational bots" data-cat="bots">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Free" data-name="conversational bots" data-cat="bots">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Bots</span></td>
                     <td class="col-feat"><strong>Conversational bots</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Free" data-name="knowledge base" data-cat="knowledge base">
@@ -1515,13 +1553,13 @@
                     <td class="usage-note note-unverified">No dedicated public Knowledge Base entitlement API confirmed</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="customer portal" data-cat="portal">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="customer portal" data-cat="portal">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Portal</span></td>
                     <td class="col-feat"><strong>Customer portal</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated Customer Portal entitlement API confirmed in HubSpot (verify in Service Settings)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="ticket routing and escalation" data-cat="routing">
@@ -1539,25 +1577,25 @@
                     <td class="col-feat"><strong>Service workflows</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="usage-note note-used">Active: 9 active workflows (15 total in portal)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Free" data-name="customer feedback surveys" data-cat="surveys">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="customer feedback surveys" data-cat="surveys">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Surveys</span></td>
                     <td class="col-feat"><strong>Customer feedback surveys</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
-                    <td class="usage-note note-unverified">Public Feedback Submissions API available; requires feedback scope</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 11 survey submissions received</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="post-chat feedback" data-cat="csat">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Professional" data-name="post-chat feedback" data-cat="csat">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">CSAT</span></td>
                     <td class="col-feat"><strong>Post-chat feedback</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 11 survey submissions received</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Free" data-name="customer success workspace/health" data-cat="customer health">
@@ -1569,31 +1607,31 @@
                     <td class="usage-note note-unverified">No dedicated Help Desk Spaces API confirmed in HubSpot</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Starter" data-name="service goals" data-cat="goals">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Starter" data-name="service goals" data-cat="goals">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Goals</span></td>
                     <td class="col-feat"><strong>Service goals</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public Goals API confirmed in HubSpot (verify in Settings/Goals)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="service playbooks" data-cat="playbooks">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="service playbooks" data-cat="playbooks">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Playbooks</span></td>
                     <td class="col-feat"><strong>Service playbooks</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public Playbooks API confirmed in HubSpot (verify in Settings/Playbooks)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="renewal/upgrade forecasting" data-cat="forecasting">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="renewal/upgrade forecasting" data-cat="forecasting">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Forecasting</span></td>
                     <td class="col-feat"><strong>Renewal/upgrade forecasting</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">Public Forecasts API available; requires custom object or forecast scope</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="calling minutes" data-cat="calling">
@@ -1602,16 +1640,16 @@
                     <td class="col-feat"><strong>Calling minutes</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 2 calling engagements recorded in CRM</td>
+                    <td class="usage-note note-used">Active: 211 calling engagements recorded in CRM</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="whatsapp integration" data-cat="whatsapp">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Professional" data-name="whatsapp integration" data-cat="whatsapp">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">WhatsApp</span></td>
                     <td class="col-feat"><strong>WhatsApp integration</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="service analytics and reporting" data-cat="analytics">
@@ -1623,13 +1661,13 @@
                     <td class="usage-note note-used">Active: Standard CRM performance reporting dashboards active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Starter" data-name="customer agent / ai service tools" data-cat="ai">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Starter" data-name="customer agent / ai service tools" data-cat="ai">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">AI</span></td>
                     <td class="col-feat"><strong>Customer Agent / AI service tools</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="SHELFWARE" data-tier="Free" data-name="hubspot credits" data-cat="credits">
@@ -1650,22 +1688,22 @@
                     <td class="usage-note note-used">8 users active in portal</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="help desk spaces" data-cat="help desk">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Professional" data-name="help desk spaces" data-cat="help desk">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Help desk</span></td>
                     <td class="col-feat"><strong>Help Desk Spaces</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="macros" data-cat="help desk">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="macros" data-cat="help desk">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Help desk</span></td>
                     <td class="col-feat"><strong>Macros</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated Macros API confirmed in HubSpot (verify in Conversations > Templates & Macros)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Enterprise" data-name="capacity limits (live chat)" data-cat="help desk">
@@ -1677,40 +1715,40 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="knowledge base single sign-on" data-cat="knowledge base">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="knowledge base single sign-on" data-cat="knowledge base">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Knowledge base</span></td>
                     <td class="col-feat"><strong>Knowledge base single sign-on</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public Knowledge Base entitlement API confirmed</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Starter" data-name="hubspot-provided phone numbers" data-cat="calls">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Starter" data-name="hubspot-provided phone numbers" data-cat="calls">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Calls</span></td>
                     <td class="col-feat"><strong>HubSpot-provided phone numbers</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 211 calling engagements recorded in CRM</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="call transcription and coaching" data-cat="calls">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Professional" data-name="call transcription and coaching" data-cat="calls">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Calls</span></td>
                     <td class="col-feat"><strong>Call transcription and coaching</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 211 calling engagements recorded in CRM</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="sequences" data-cat="sequences">
+                <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Professional" data-name="sequences" data-cat="sequences">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Sequences</span></td>
                     <td class="col-feat"><strong>Sequences</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 43 sales sequences created</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Service Hub" data-status="USED" data-tier="Free" data-name="reporting dashboard" data-cat="reporting">
@@ -1740,13 +1778,13 @@
                     <td class="usage-note note-locked">Locked (Requires Enterprise)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Service Hub" data-status="LOCKED" data-tier="Professional" data-name="product usage tracking (beta)" data-cat="retention">
+                <tr class="feat-row" data-hub="Service Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="product usage tracking (beta)" data-cat="retention">
                     <td class="col-hub"><span class="hub-pill hub-service-hub">Service Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Retention</span></td>
                     <td class="col-feat"><strong>Product Usage Tracking (Beta)</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">Partial Telemetry: SaaS usage tracking requires event webhook (verify in Service Settings > Product Usage)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="website pages" data-cat="website">
@@ -1755,7 +1793,7 @@
                     <td class="col-feat"><strong>Website pages</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7 landing pages published</td>
+                    <td class="usage-note note-used">Active: 2 landing pages published</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="premium hosting, ssl, cdn, waf" data-cat="hosting">
@@ -1764,7 +1802,7 @@
                     <td class="col-feat"><strong>Premium hosting, SSL, CDN, WAF</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 6 connected custom domains (50849936.hs-sites.com, geciproducts-50849936.hs-sites.com) with SSL/CDN</td>
+                    <td class="usage-note note-used">Active: 8 connected custom domains (245317936.hs-sites-na2.com, starkedge-245317936.hs-sites-na2.com) with SSL/CDN</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="subdomains and country-code domains" data-cat="domains">
@@ -1773,7 +1811,7 @@
                     <td class="col-feat"><strong>Subdomains and country-code domains</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 6 connected custom domains (50849936.hs-sites.com, geciproducts-50849936.hs-sites.com) with SSL/CDN</td>
+                    <td class="usage-note note-used">Active: 8 connected custom domains (245317936.hs-sites-na2.com, starkedge-245317936.hs-sites-na2.com) with SSL/CDN</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="landing pages" data-cat="landing pages">
@@ -1782,7 +1820,7 @@
                     <td class="col-feat"><strong>Landing pages</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7 landing pages published</td>
+                    <td class="usage-note note-used">Active: 2 landing pages published</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="blogs and posts" data-cat="blog">
@@ -1791,7 +1829,7 @@
                     <td class="col-feat"><strong>Blogs and posts</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 3 blog posts published</td>
+                    <td class="usage-note note-used">Active: 212 blog posts published</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Free" data-name="seo recommendations" data-cat="seo">
@@ -1803,31 +1841,31 @@
                     <td class="usage-note note-unverified">No complete public SEO recommendations API confirmed in HubSpot</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Starter" data-name="smart content and personalization" data-cat="content">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Starter" data-name="smart content and personalization" data-cat="content">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Content</span></td>
                     <td class="col-feat"><strong>Smart content and personalization</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-starter">Starter</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Starter)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated configuration API confirmed in HubSpot (verify in Page/Email editor)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="a/b and adaptive testing" data-cat="content">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="a/b and adaptive testing" data-cat="content">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Content</span></td>
                     <td class="col-feat"><strong>A/B and adaptive testing</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="multi-language content" data-cat="localization">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Free" data-name="multi-language content" data-cat="localization">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Localization</span></td>
                     <td class="col-feat"><strong>Multi-language content</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="live chat" data-cat="chat">
@@ -1836,16 +1874,16 @@
                     <td class="col-feat"><strong>Live chat</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="conversational bots" data-cat="bots">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Free" data-name="conversational bots" data-cat="bots">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Bots</span></td>
                     <td class="col-feat"><strong>Conversational bots</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="facebook messenger integration" data-cat="messenger">
@@ -1854,25 +1892,25 @@
                     <td class="col-feat"><strong>Facebook Messenger integration</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="logged-in visitor identification" data-cat="visitor id">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="logged-in visitor identification" data-cat="visitor id">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Visitor ID</span></td>
                     <td class="col-feat"><strong>Logged-in visitor identification</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">Chat widget JS embed setting (no dedicated server API)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="draggable chat widget" data-cat="chat widget">
+                <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Professional" data-name="draggable chat widget" data-cat="chat widget">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Chat widget</span></td>
                     <td class="col-feat"><strong>Draggable chat widget</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Free" data-name="cookie management tools" data-cat="cookies">
@@ -1884,31 +1922,31 @@
                     <td class="usage-note note-unverified">No dedicated Cookie API confirmed in HubSpot (verify in Privacy & Consent)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="membership/access groups" data-cat="membership">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Professional" data-name="membership/access groups" data-cat="membership">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Membership</span></td>
                     <td class="col-feat"><strong>Membership/access groups</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">Membership configuration; verify in CMS Settings > Memberships</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="video hosting and management" data-cat="video">
+                <tr class="feat-row" data-hub="Content Hub" data-status="SHELFWARE" data-tier="Professional" data-name="video hosting and management" data-cat="video">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Video</span></td>
                     <td class="col-feat"><strong>Video hosting and management</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">Partial Telemetry: 0 native video files hosted in File Manager (external embedded videos require manual check)</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="video creation/editing" data-cat="video">
+                <tr class="feat-row" data-hub="Content Hub" data-status="SHELFWARE" data-tier="Professional" data-name="video creation/editing" data-cat="video">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Video</span></td>
                     <td class="col-feat"><strong>Video creation/editing</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">Partial Telemetry: 0 native video files hosted in File Manager (external embedded videos require manual check)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="reporting dashboard" data-cat="reporting">
@@ -1920,22 +1958,22 @@
                     <td class="usage-note note-used">Active: Standard CRM performance reporting dashboards active</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="LOCKED" data-tier="Professional" data-name="custom events" data-cat="events">
+                <tr class="feat-row" data-hub="Content Hub" data-status="SHELFWARE" data-tier="Professional" data-name="custom events" data-cat="events">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Events</span></td>
                     <td class="col-feat"><strong>Custom events</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-professional">Professional</span></td>
-                    <td class="col-status"><span class="badge badge-locked"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/></svg></span><span>LOCKED</span></span></td>
-                    <td class="usage-note note-locked">Locked (Requires Professional)</td>
+                    <td class="col-status"><span class="badge badge-shelfware"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span><span>SHELFWARE</span></span></td>
+                    <td class="usage-note note-shelfware">API Verified: 0 custom behavioral events configured</td>
                 </tr>
                 
-                <tr class="feat-row" data-hub="Content Hub" data-status="USED" data-tier="Free" data-name="limit access to content" data-cat="permissions">
+                <tr class="feat-row" data-hub="Content Hub" data-status="UNVERIFIED" data-tier="Free" data-name="limit access to content" data-cat="permissions">
                     <td class="col-hub"><span class="hub-pill hub-content-hub">Content Hub</span></td>
                     <td class="col-cat"><span class="category-tag">Permissions</span></td>
                     <td class="col-feat"><strong>Limit access to content</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
-                    <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter capability active</td>
+                    <td class="col-status"><span class="badge badge-unverified"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg></span><span>UNVERIFIED</span></span></td>
+                    <td class="usage-note note-unverified">No dedicated public API confirmed in HubSpot (verify in Settings)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Content Hub" data-status="SHELFWARE" data-tier="Free" data-name="ai content tools and credits" data-cat="ai">
@@ -2007,7 +2045,7 @@
                     <td class="col-feat"><strong>Data workflows</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="usage-note note-used">Active: 9 active workflows (15 total in portal)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Data Hub" data-status="LOCKED" data-tier="Professional" data-name="datasets" data-cat="data studio">
@@ -2133,7 +2171,7 @@
                     <td class="col-feat"><strong>Quote-to-cash/revenue automation</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 15 active workflows (15 total in portal)</td>
+                    <td class="usage-note note-used">Active: 9 active workflows (15 total in portal)</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Commerce Hub" data-status="USED" data-tier="Free" data-name="revenue reporting" data-cat="analytics">
@@ -2169,7 +2207,7 @@
                     <td class="col-feat"><strong>Contacts, companies, deals, tickets and activities</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7,753 contacts & CRM records actively managed</td>
+                    <td class="usage-note note-used">Active: 5,994 contacts & CRM records actively managed</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Smart CRM" data-status="SHELFWARE" data-tier="Free" data-name="custom objects" data-cat="crm">
@@ -2241,7 +2279,7 @@
                     <td class="col-feat"><strong>Paid contact storage</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7,753 contacts & CRM records actively managed</td>
+                    <td class="usage-note note-used">Active: 5,994 contacts & CRM records actively managed</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Smart CRM" data-status="UNVERIFIED" data-tier="Free" data-name="forms and fields" data-cat="forms">
@@ -2259,7 +2297,7 @@
                     <td class="col-feat"><strong>Chatbots/live chat widgets</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Core starter chat & shared inbox active</td>
+                    <td class="usage-note note-used">Active: 5 conversation threads active in Help Desk</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="social connected accounts/posts" data-cat="social">
@@ -2286,7 +2324,7 @@
                     <td class="col-feat"><strong>Contact tier and marketing email sends</strong></td>
                     <td class="col-tier"><span class="tier-pill tier-free">Free</span></td>
                     <td class="col-status"><span class="badge badge-used"><span class="badge-icon"><svg class="badge-icon" width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span>USED</span></span></td>
-                    <td class="usage-note note-used">Active: 7,753 contacts & CRM records actively managed</td>
+                    <td class="usage-note note-used">Active: 5,994 contacts & CRM records actively managed</td>
                 </tr>
                 
                 <tr class="feat-row" data-hub="Smart CRM" data-status="USED" data-tier="Free" data-name="support channels" data-cat="support">
@@ -2321,14 +2359,14 @@
                     Simulates what tools, data, and workflows would be disabled if downgrading to a lower subscription tier based on your current asset count.
                 </p>
                 
-            <div class="card risk-card risk-critical">
+            <div class="card risk-card risk-high">
                 <div class="risk-header">
-                    <span class="risk-badge risk-critical">CRITICAL RISK</span>
-                    <h3>Marketing Hub: Professional → Starter</h3>
+                    <span class="risk-badge risk-high">HIGH RISK</span>
+                    <h3>Sales Hub: Professional → Starter</h3>
                 </div>
-                <p><strong>Impact:</strong> 15 active automated workflows will be disabled and locked.</p>
+                <p><strong>Impact:</strong> You currently have 5 deal pipelines. Starter tier strictly enforces a maximum of 2 pipelines.</p>
                 <div class="action-box">
-                    <strong>Recommended Action:</strong> Export workflow logic, enrollment triggers, and webhooks before downgrading.
+                    <strong>Recommended Action:</strong> Consolidate 3 pipelines into your 2 core pipelines before changing subscription.
                 </div>
             </div>
             
@@ -2340,11 +2378,50 @@
             <div class="card">
                 <h2>Actionable Optimization Roadmap</h2>
                 
+            <div class="card rec-card">
+                <div class="rec-header">
+                    <div>
+                        <span class="prio-tag prio-medium">MEDIUM PRIORITY</span>
+                        <span class="cat-pill">AI & Credits Adoption</span>
+                        <h3 style="margin-top: 8px;">Utilize 3,000 Monthly AI Credits (100% Currently Expiring Wasted)</h3>
+                    </div>
+                    
+                </div>
+                <p style="color: #4b5563; font-size: 15px; margin: 12px 0;">Your plan includes 3,000 monthly HubSpot AI credits (for Breeze AI Assistant, Prospecting Agents, and Content Remix), but your team has used only 0 credits (0.0%). These credits do not roll over and reset every billing cycle.</p>
+                <div class="steps-box">
+                    <strong>Implementation Steps:</strong>
+                    <ol><li>Train sales reps to use Breeze AI for email drafting and CRM record summaries.</li><li>Use Content Hub Pro AI Content Remix to turn 1 blog post into social posts, emails, and landing page copy.</li><li>Explore Agent Hub features in Marketing/Sales before your next credit reset on Monthly Renewal.</li></ol>
+                </div>
+            </div>
+            
             </div>
         </div>
     </div>
 
     <script>
+        function copyShareLink(btn) {
+            const url = window.location.href;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(() => {
+                    const orig = btn.innerHTML;
+                    btn.innerHTML = '✅ Link Copied!';
+                    btn.style.background = '#dcfce7';
+                    btn.style.color = '#15803d';
+                    btn.style.borderColor = '#86efac';
+                    setTimeout(() => {
+                        btn.innerHTML = orig;
+                        btn.style.background = 'white';
+                        btn.style.color = '#2563eb';
+                        btn.style.borderColor = '#93c5fd';
+                    }, 2500);
+                }).catch(() => {
+                    prompt('Copy this shareable report link:', url);
+                });
+            } else {
+                prompt('Copy this shareable report link:', url);
+            }
+        }
+
         function openTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));

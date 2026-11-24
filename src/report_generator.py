@@ -657,6 +657,7 @@ class ReportGenerator:
             </div>
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                 <a href="/" class="btn-print" style="text-decoration: none; background: white; color: #334155; border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 6px;">← Back to Analyzer</a>
+                <button onclick="copyShareLink(this)" class="btn-print" style="background: white; color: #2563eb; border: 1px solid #93c5fd; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">🔗 Copy Share Link</button>
                 <button onclick="window.print()" class="btn-print">Print / Save PDF</button>
             </div>
         </div>
@@ -907,6 +908,29 @@ class ReportGenerator:
     </div>
 
     <script>
+        function copyShareLink(btn) {{
+            const url = window.location.href;
+            if (navigator.clipboard && window.isSecureContext) {{
+                navigator.clipboard.writeText(url).then(() => {{
+                    const orig = btn.innerHTML;
+                    btn.innerHTML = '✅ Link Copied!';
+                    btn.style.background = '#dcfce7';
+                    btn.style.color = '#15803d';
+                    btn.style.borderColor = '#86efac';
+                    setTimeout(() => {{
+                        btn.innerHTML = orig;
+                        btn.style.background = 'white';
+                        btn.style.color = '#2563eb';
+                        btn.style.borderColor = '#93c5fd';
+                    }}, 2500);
+                }}).catch(() => {{
+                    prompt('Copy this shareable report link:', url);
+                }});
+            }} else {{
+                prompt('Copy this shareable report link:', url);
+            }}
+        }}
+
         function openTab(tabName) {{
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
