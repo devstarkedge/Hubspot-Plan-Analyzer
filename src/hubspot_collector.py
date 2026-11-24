@@ -194,19 +194,14 @@ class HubSpotCollector:
             if any("view" in s for s in seat_names):
                 view_only_seats += 1
 
-        # Check active deal owners in CRM to auto-detect assigned sales reps if 0
-        if paid_sales_seats == 0 and total_users > 0:
-            deal_owners = set()
-            deals_res = self._get("/crm/v3/objects/deals", params={"properties": "hubspot_owner_id", "limit": 100})
-            if isinstance(deals_res, dict) and "results" in deals_res:
-                for d in deals_res["results"]:
-                    oid = d.get("properties", {}).get("hubspot_owner_id")
-                    if oid:
-                        deal_owners.add(str(oid))
-            paid_sales_seats = len(deal_owners) if deal_owners else min(total_users, 1)
+        if not detected_sales_tier:
+            detected_sales_tier = "Free"
 
-        if paid_service_seats == 0 and total_users > 0:
-            paid_service_seats = min(total_users, 1)
+        if not detected_service_tier:
+            detected_service_tier = "Free"
+
+        if not detected_revenue_tier:
+            detected_revenue_tier = "Free"
 
         return {
             "total_users": total_users,
@@ -496,7 +491,11 @@ class HubSpotCollector:
         events = self.collect_events()
         files = self.collect_files_and_videos()
 
-        # Handle contracted & assigned seats accurately
+        # Handle contracted & assigned seats accurately from API and declarations
+        api_sales = users_seats.get("paid_sales_seats", 0)
+        api_service = users_seats.get("paid_service_seats", 0)
+        api_core = users_seats.get("core_seats_used", 0)
+
         if contracted_seats:
             if "sales" in contracted_seats:
                 users_seats["contracted_sales_seats"] = contracted_seats["sales"]
@@ -507,44 +506,37 @@ class HubSpotCollector:
 
         if contract_info and "seats" in contract_info:
             cs = contract_info["seats"]
-            users_seats["contracted_sales_seats"] = cs.get("sales_contracted", users_seats.get("contracted_sales_seats", 2))
-            users_seats["paid_sales_seats"] = cs.get("sales_assigned", users_seats.get("contracted_sales_seats", 2))
+            users_seats["contracted_sales_seats"] = cs.get("sales_contracted", api_sales)
+            users_seats["paid_sales_seats"] = cs.get("sales_assigned", api_sales)
             users_seats["unassigned_sales_seats"] = cs.get("sales_unassigned", 0)
 
-            users_seats["contracted_service_seats"] = cs.get("service_contracted", users_seats.get("contracted_service_seats", 1))
-            users_seats["paid_service_seats"] = cs.get("service_assigned", users_seats.get("contracted_service_seats", 1))
+            users_seats["contracted_service_seats"] = cs.get("service_contracted", api_service)
+            users_seats["paid_service_seats"] = cs.get("service_assigned", api_service)
             users_seats["unassigned_service_seats"] = cs.get("service_unassigned", 0)
 
-            users_seats["contracted_core_seats"] = cs.get("core_contracted", 4)
-            api_core = users_seats.get("core_seats_used", 0)
-            core_assigned_val = cs.get("core_assigned", (api_core if api_core > 0 else 2))
+            users_seats["contracted_core_seats"] = cs.get("core_contracted", api_core)
+            core_assigned_val = cs.get("core_assigned", api_core)
             users_seats["core_seats_used"] = core_assigned_val
             users_seats["core_seats_available"] = cs.get("core_unassigned", max(0, users_seats["contracted_core_seats"] - core_assigned_val))
             users_seats["core_seats_left"] = users_seats["core_seats_available"]
         elif contracted_seats:
-            # If user explicitly declared contracted seats, determine assigned from API or default to assigned
-            api_sales = users_seats.get("paid_sales_seats", 0)
-            contract_sales = users_seats.get("contracted_sales_seats", 2)
-            users_seats["paid_sales_seats"] = contract_sales
-            users_seats["unassigned_sales_seats"] = 0  # Default to full unless explicitly indicated
+            users_seats["paid_sales_seats"] = users_seats.get("contracted_sales_seats", api_sales)
+            users_seats["unassigned_sales_seats"] = 0
 
-            api_service = users_seats.get("paid_service_seats", 0)
-            contract_service = users_seats.get("contracted_service_seats", 1)
-            users_seats["paid_service_seats"] = contract_service
+            users_seats["paid_service_seats"] = users_seats.get("contracted_service_seats", api_service)
             users_seats["unassigned_service_seats"] = 0
 
-            users_seats["contracted_core_seats"] = 4
-            api_core = users_seats.get("core_seats_used", 0)
-            users_seats["core_seats_used"] = api_core if api_core > 0 else 2
-            users_seats["core_seats_available"] = max(0, 4 - users_seats["core_seats_used"])
+            contracted_core = users_seats.get("contracted_core_seats", api_core)
+            users_seats["core_seats_used"] = api_core
+            users_seats["core_seats_available"] = max(0, contracted_core - api_core)
             users_seats["core_seats_left"] = users_seats["core_seats_available"]
         else:
             # Automatically calculate from selected plans and live CRM telemetry
             cur_plans = declared_plans or {}
-            mkt_tier = cur_plans.get("Marketing Hub", "Starter")
-            content_tier = cur_plans.get("Content Hub", "Professional")
-            sales_tier = cur_plans.get("Sales Hub", "Professional")
-            service_tier = cur_plans.get("Service Hub", "Professional")
+            mkt_tier = cur_plans.get("Marketing Hub", "Free")
+            content_tier = cur_plans.get("Content Hub", "Free")
+            sales_tier = cur_plans.get("Sales Hub", "Free")
+            service_tier = cur_plans.get("Service Hub", "Free")
             data_tier = cur_plans.get("Data Hub", cur_plans.get("Data Hub (formerly Operations Hub)", "Free"))
             rev_tier = cur_plans.get("Commerce Hub", cur_plans.get("Revenue Hub", "Free"))
             crm_tier = cur_plans.get("Smart CRM", "Free")
@@ -552,42 +544,28 @@ class HubSpotCollector:
             mkt_core = 1 if mkt_tier == "Starter" else (3 if mkt_tier == "Professional" else (5 if mkt_tier == "Enterprise" else 0))
             content_core = 1 if content_tier == "Starter" else (3 if content_tier == "Professional" else (5 if content_tier == "Enterprise" else 0))
             data_core = 1 if data_tier in ["Starter", "Professional", "Enterprise"] else 0
-            total_core = mkt_core + content_core + data_core
-            total_portal_users = users_seats.get("total_users", 0)
+            plan_core_allowance = mkt_core + content_core + data_core
 
+            # Contracted core seats are at least the plan allowance, or live core seats used if higher (e.g. extra purchased seats)
+            total_core = max(plan_core_allowance, api_core)
             users_seats["contracted_core_seats"] = total_core
-            
-            # Core seats assigned: cannot exceed total distinct users in the portal
-            if total_portal_users <= 1:
-                assigned_core = min(total_core, total_portal_users)
-            else:
-                assigned_core = min(total_core, min(total_portal_users, 2))
-
-            users_seats["core_seats_used"] = assigned_core
-            users_seats["core_seats_available"] = max(0, total_core - assigned_core)
+            users_seats["core_seats_used"] = api_core
+            users_seats["core_seats_available"] = max(0, total_core - api_core)
             users_seats["core_seats_left"] = users_seats["core_seats_available"]
 
-            api_sales = users_seats.get("paid_sales_seats", 0)
             if sales_tier == "Free":
                 sales_count = 0
             else:
-                if total_portal_users <= 1:
-                    sales_count = 1
-                else:
-                    sales_count = max(1, api_sales if api_sales > 0 else 2)
+                sales_count = api_sales if api_sales > 0 else 1
 
             users_seats["contracted_sales_seats"] = sales_count
             users_seats["paid_sales_seats"] = sales_count
             users_seats["unassigned_sales_seats"] = 0
 
-            api_service = users_seats.get("paid_service_seats", 0)
             if service_tier == "Free":
                 service_count = 0
             else:
-                if total_portal_users <= 1:
-                    service_count = 1
-                else:
-                    service_count = max(1, api_service if api_service > 0 else 1)
+                service_count = api_service if api_service > 0 else 1
 
             users_seats["contracted_service_seats"] = service_count
             users_seats["paid_service_seats"] = service_count
@@ -595,10 +573,10 @@ class HubSpotCollector:
 
         # Inferred or user-declared plan
         plans = declared_plans or {
-            "Marketing Hub": "Professional" if automation.get("active_workflows", 0) > 0 else "Starter",
-            "Sales Hub": "Professional" if automation.get("total_sequences", 0) > 0 or pipelines.get("deal_pipelines_count", 0) > 2 else "Starter",
+            "Marketing Hub": "Professional" if automation.get("active_workflows", 0) > 0 else ("Starter" if contacts.get("marketing_contacts", 0) > 0 else "Free"),
+            "Sales Hub": "Professional" if users_seats.get("paid_sales_seats", 0) > 0 else "Free",
             "Service Hub": "Professional" if users_seats.get("paid_service_seats", 0) > 0 else "Free",
-            "Content Hub": "Professional" if marketing.get("landing_pages_count", 0) > 0 or marketing.get("blog_posts_count", 0) > 0 else "Free",
+            "Content Hub": "Professional" if marketing.get("blog_posts_count", 0) > 10 else "Free",
             "Data Hub": "Free",
             "Commerce Hub": "Free",
             "Smart CRM": "Free"

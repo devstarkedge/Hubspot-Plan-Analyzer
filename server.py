@@ -187,13 +187,13 @@ INDEX_HTML = """<!DOCTYPE html>
                         <div class="plan-item">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <label style="margin-bottom: 0;"><strong>Marketing Hub</strong></label>
-                                <span id="mkt_badge" style="background: #dbeafe; color: #1e40af; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">+1 Core Seat</span>
+                                <span id="mkt_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free Tools</span>
                             </div>
                             <select id="plan_mkt" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
-                                <option value="Starter" selected>Starter</option>
+                                <option value="Free" selected>Free</option>
+                                <option value="Starter">Starter</option>
                                 <option value="Professional">Professional</option>
                                 <option value="Enterprise">Enterprise</option>
-                                <option value="Free">Free</option>
                             </select>
                         </div>
 
@@ -201,13 +201,13 @@ INDEX_HTML = """<!DOCTYPE html>
                         <div class="plan-item">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <label style="margin-bottom: 0;"><strong>Sales Hub</strong></label>
-                                <span id="sales_badge" style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Pro CRM</span>
+                                <span id="sales_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free CRM</span>
                             </div>
                             <select id="plan_sales" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
-                                <option value="Professional" selected>Professional</option>
+                                <option value="Free" selected>Free</option>
                                 <option value="Starter">Starter</option>
+                                <option value="Professional">Professional</option>
                                 <option value="Enterprise">Enterprise</option>
-                                <option value="Free">Free</option>
                             </select>
                         </div>
 
@@ -215,13 +215,13 @@ INDEX_HTML = """<!DOCTYPE html>
                         <div class="plan-item">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <label style="margin-bottom: 0;"><strong>Service Hub</strong></label>
-                                <span id="service_badge" style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Pro Service</span>
+                                <span id="service_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free Service</span>
                             </div>
                             <select id="plan_service" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
-                                <option value="Professional" selected>Professional</option>
+                                <option value="Free" selected>Free</option>
                                 <option value="Starter">Starter</option>
+                                <option value="Professional">Professional</option>
                                 <option value="Enterprise">Enterprise</option>
-                                <option value="Free">Free</option>
                             </select>
                         </div>
 
@@ -229,13 +229,13 @@ INDEX_HTML = """<!DOCTYPE html>
                         <div class="plan-item">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <label style="margin-bottom: 0;"><strong>Content Hub</strong></label>
-                                <span id="content_badge" style="background: #dbeafe; color: #1e40af; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">+3 Core Seats</span>
+                                <span id="content_badge" style="background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Free CMS</span>
                             </div>
                             <select id="plan_content" class="select-box" onchange="updateAllPlansAndSeats()" disabled>
-                                <option value="Professional" selected>Professional</option>
+                                <option value="Free" selected>Free</option>
                                 <option value="Starter">Starter</option>
+                                <option value="Professional">Professional</option>
                                 <option value="Enterprise">Enterprise</option>
-                                <option value="Free">Free</option>
                             </select>
                         </div>
 
@@ -494,11 +494,14 @@ INDEX_HTML = """<!DOCTYPE html>
                     badgeEl.style.background = '#dcfce7';
                     badgeEl.style.color = '#15803d';
 
-                    // Auto-select detected tiers
-                    if (res.detected_mkt_tier) document.getElementById('plan_mkt').value = res.detected_mkt_tier;
-                    if (res.detected_sales_tier) document.getElementById('plan_sales').value = res.detected_sales_tier;
-                    if (res.detected_service_tier) document.getElementById('plan_service').value = res.detected_service_tier;
-                    if (res.detected_revenue_tier) document.getElementById('plan_revenue').value = res.detected_revenue_tier;
+                    // Auto-select detected tiers from live API
+                    document.getElementById('plan_mkt').value = res.detected_mkt_tier || 'Free';
+                    document.getElementById('plan_sales').value = res.detected_sales_tier || 'Free';
+                    document.getElementById('plan_service').value = res.detected_service_tier || 'Free';
+                    document.getElementById('plan_content').value = res.detected_content_tier || 'Free';
+                    document.getElementById('plan_revenue').value = res.detected_revenue_tier || 'Free';
+                    document.getElementById('plan_data').value = res.detected_data_tier || 'Free';
+                    document.getElementById('plan_crm').value = res.detected_crm_tier || 'Free';
                     updateAllPlansAndSeats();
 
                     // Auto-populate dynamic defaults into editable fields
@@ -747,12 +750,23 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                 contacts = collector.collect_contacts_quota()
                 auto = collector.collect_automation()
                 calls = collector.collect_calls()
+                cms = collector.collect_marketing_and_cms()
 
                 mkt_cnt = contacts.get("marketing_contacts") or contacts.get("total_contacts", 0)
                 tot_cnt = contacts.get("total_contacts", 0)
 
                 # Infer Marketing plan based on portal automation
-                detected_mkt_tier = "Professional" if auto.get("active_workflows", 0) > 0 else "Starter"
+                detected_mkt_tier = "Professional" if auto.get("active_workflows", 0) > 0 else ("Starter" if mkt_cnt > 0 else "Free")
+
+                # Detect Sales & Service tiers from live user seat assignments (User Provisioning API)
+                detected_sales_tier = seats.get("detected_sales_tier") or "Free"
+                detected_service_tier = seats.get("detected_service_tier") or "Free"
+                detected_revenue_tier = seats.get("detected_revenue_tier") or "Free"
+
+                # Detect Content Hub based on blog/landing pages volume
+                detected_content_tier = "Professional" if cms.get("blog_posts_count", 0) > 10 else "Free"
+                detected_data_tier = "Free"
+                detected_crm_tier = "Free"
 
                 # Calculate official HubSpot marketing contact tier ceiling:
                 if detected_mkt_tier == "Professional":
@@ -766,9 +780,10 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                 # Dynamic AI credits based on detected subscription tiers (NO hardcoded portal IDs or counts)
                 has_pro_or_ent = any(t in ["Professional", "Enterprise"] for t in [
                     detected_mkt_tier,
-                    seats.get("detected_sales_tier"),
-                    seats.get("detected_service_tier"),
-                    seats.get("detected_revenue_tier")
+                    detected_sales_tier,
+                    detected_service_tier,
+                    detected_revenue_tier,
+                    detected_content_tier
                 ])
                 total_credits = 3000 if has_pro_or_ent else 0
                 used_credits = 0  # Dynamic default; user enters live usage from portal in the dashboard
@@ -782,9 +797,12 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                     "company_name": acc.get("company_name"),
                     "currency": acc.get("currency", "USD"),
                     "detected_mkt_tier": detected_mkt_tier,
-                    "detected_sales_tier": seats.get("detected_sales_tier"),
-                    "detected_service_tier": seats.get("detected_service_tier"),
-                    "detected_revenue_tier": seats.get("detected_revenue_tier"),
+                    "detected_sales_tier": detected_sales_tier,
+                    "detected_service_tier": detected_service_tier,
+                    "detected_content_tier": detected_content_tier,
+                    "detected_revenue_tier": detected_revenue_tier,
+                    "detected_data_tier": detected_data_tier,
+                    "detected_crm_tier": detected_crm_tier,
                     "paid_sales_seats": seats.get("paid_sales_seats", 0),
                     "paid_service_seats": seats.get("paid_service_seats", 0),
                     "paid_revenue_seats": seats.get("paid_revenue_seats", 0),

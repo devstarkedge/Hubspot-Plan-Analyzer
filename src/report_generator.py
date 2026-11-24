@@ -27,16 +27,16 @@ class ReportGenerator:
         metrics = self.data.get("metrics", {})
 
         users_m = metrics.get("users", {})
-        sales_contracted = users_m.get("contracted_sales_seats", 2)
+        sales_contracted = users_m.get("contracted_sales_seats", users_m.get("paid_sales_seats", 0))
         sales_assigned = users_m.get("paid_sales_seats", sales_contracted)
         sales_unassigned = users_m.get("unassigned_sales_seats", 0)
 
-        service_contracted = users_m.get("contracted_service_seats", 1)
+        service_contracted = users_m.get("contracted_service_seats", users_m.get("paid_service_seats", 0))
         service_assigned = users_m.get("paid_service_seats", service_contracted)
         service_unassigned = users_m.get("unassigned_service_seats", 0)
 
-        core_contracted = users_m.get("contracted_core_seats", 4)
-        core_assigned = users_m.get("core_seats_used", 2)
+        core_contracted = users_m.get("contracted_core_seats", users_m.get("core_seats_used", 0))
+        core_assigned = users_m.get("core_seats_used", 0)
         core_available = users_m.get("core_seats_left", max(0, core_contracted - core_assigned))
 
         credits_m = metrics.get("credits", {})
@@ -48,7 +48,7 @@ class ReportGenerator:
 
         contacts_m = metrics.get("contacts", {})
         contacts_used = contacts_m.get("marketing_contacts", 0)
-        contacts_tier = contacts_m.get("contracted_tier", 1000)
+        contacts_tier = contacts_m.get("contracted_tier") or contacts_m.get("marketing_contacts", 0)
         contacts_headroom = max(0, contacts_tier - contacts_used)
         contacts_pct = round((contacts_used / max(1, contacts_tier)) * 100, 1)
 

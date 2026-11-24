@@ -227,22 +227,22 @@ class PlanAnalyzer:
                     list_monthly_total_inr += m_rate
 
         # Idle & Unassigned seats waste calculation
-        contracted_sales = users_m.get("contracted_sales_seats", users_m.get("paid_sales_seats", 2))
+        contracted_sales = users_m.get("contracted_sales_seats", users_m.get("paid_sales_seats", 0))
         assigned_sales = users_m.get("paid_sales_seats", contracted_sales)
         if "unassigned_sales_seats" in users_m:
             unassigned_sales = users_m["unassigned_sales_seats"]
         else:
             unassigned_sales = max(0, contracted_sales - assigned_sales)
 
-        contracted_service = users_m.get("contracted_service_seats", users_m.get("paid_service_seats", 1))
+        contracted_service = users_m.get("contracted_service_seats", users_m.get("paid_service_seats", 0))
         assigned_service = users_m.get("paid_service_seats", contracted_service)
         if "unassigned_service_seats" in users_m:
             unassigned_service = users_m["unassigned_service_seats"]
         else:
             unassigned_service = max(0, contracted_service - assigned_service)
 
-        contracted_core = users_m.get("contracted_core_seats", 4)
-        used_core = users_m.get("core_seats_used", 2)
+        contracted_core = users_m.get("contracted_core_seats", users_m.get("core_seats_used", 0))
+        used_core = users_m.get("core_seats_used", 0)
         available_core = users_m.get("core_seats_available", max(0, contracted_core - used_core))
         users_m["core_seats_left"] = available_core
         users_m["core_seats_used"] = used_core
