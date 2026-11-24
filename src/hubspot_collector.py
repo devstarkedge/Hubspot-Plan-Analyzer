@@ -74,31 +74,22 @@ class HubSpotCollector:
         portal_id = str(res.get("portalId", "Unknown"))
         acc_type = res.get("accountType", "Standard")
 
-        PORTAL_NAMES = {
-            "245317936": "Stark Edge",
-            "50849936": "Green Energy Concepts, Inc.",
-            "50399753": "INDUSTRIAL BATTERY & CHARGER, INC.",
-            "247900268": "Access Testing",
-        }
-
-        if portal_id in PORTAL_NAMES:
-            company_name = PORTAL_NAMES[portal_id]
-        else:
-            # Try resolving company brand name from CMS domains
-            dom_res = self._get("/cms/v3/domains")
-            primary_dom = None
-            if isinstance(dom_res, dict) and "results" in dom_res:
-                for d in dom_res.get("results", []):
-                    if d.get("isPrimary"):
-                        primary_dom = d.get("domain")
+        # Dynamically detect brand / company name from CMS connected domains (NO hardcoded portal IDs)
+        company_name = None
+        dom_res = self._get("/cms/v3/domains")
+        if isinstance(dom_res, dict) and "results" in dom_res:
+            for d in dom_res.get("results", []):
+                dom = d.get("domain", "")
+                if dom and "hs-sites" not in dom:
+                    base_name = dom.replace("www.", "").split(".")[0]
+                    clean_name = base_name.replace("-", " ").replace("_", " ").title()
+                    if clean_name and not clean_name.isdigit():
+                        company_name = clean_name
                         break
-                if not primary_dom and dom_res.get("results"):
-                    primary_dom = dom_res["results"][0].get("domain")
-            if primary_dom:
-                clean_dom = primary_dom.replace("www.", "").split(".")[0].replace("-", " ").title()
-                company_name = f"{clean_dom} (Portal {portal_id})"
-            elif acc_type == "DEVELOPER_TEST":
-                company_name = f"Access Testing (Dev Portal {portal_id})"
+
+        if not company_name:
+            if acc_type == "DEVELOPER_TEST":
+                company_name = f"Developer Test Portal ({portal_id})"
             else:
                 company_name = f"HubSpot Portal ({portal_id})"
 
@@ -671,22 +662,17 @@ class HubSpotCollector:
             else:
                 contacts["contracted_tier"] = 0
 
-        # HubSpot AI Credits: Any portal subscribing to any Professional or Enterprise Hub includes 3,000 monthly credits
+        # HubSpot AI Credits: Any portal subscribing to any Professional or Enterprise Hub includes 3,000 monthly credits by default
         has_pro_or_ent = any(tier in ["Professional", "Enterprise"] for tier in plans.values())
         credits_data = contract_info.get("credits", {}) if contract_info else {}
-        if has_pro_or_ent or credits_data.get("total_credits", 0) > 0:
-            total_creds = credits_data.get("total_credits", 3000)
-            if "used_credits" in credits_data:
-                used_creds = credits_data["used_credits"]
-            elif account_info.get("portal_id") == "50399753":
-                used_creds = 460  # Industrial Battery live portal billing: 460/3,000 (15%)
-            elif account_info.get("portal_id") == "50849936":
-                used_creds = 0    # Green Energy Concepts live portal billing: 0/3,000 (0%)
-            elif account_info.get("portal_id") == "245317936":
-                used_creds = 0    # Stark Edge live portal billing: 0/3,000 (0%)
-            else:
-                used_creds = 0
+        total_creds = credits_data.get("total_credits")
+        if total_creds is None:
+            total_creds = 3000 if has_pro_or_ent else 0
 
+        # Credits used come directly from live user input in the dashboard (default 0, NO hardcoding)
+        used_creds = credits_data.get("used_credits", 0)
+
+        if total_creds > 0:
             credits_m = {
                 "total_credits": total_creds,
                 "used_credits": used_creds,
@@ -702,6 +688,10 @@ class HubSpotCollector:
                 "resets_date": "N/A",
                 "status": "none"
             }
+
+        # Dynamic Company Name override from user input if provided
+        if contract_info and contract_info.get("company_name"):
+            account_info["company_name"] = contract_info["company_name"]
 
         portal_dict = {
             "account": account_info,
@@ -861,14 +851,14 @@ def generate_mock_portal_data(preset: str = "high_shelfware") -> Dict[str, Any]:
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
         }
 
-    elif preset == "stark_edge":
+    elif preset in ["stark_edge", "partner_discounted"]:
         return {
             "account": {
-                "portal_id": "245317936",
+                "portal_id": "9990001",
                 "account_type": "Solutions Partner",
                 "time_zone": "Asia/Kolkata",
                 "currency": "INR",
-                "company_name": "Stark Edge",
+                "company_name": "Global Partner Portal (Demo)",
                 "billing_term": "1 Year (Billed Every 3 Months)"
             },
             "plans": {
@@ -911,7 +901,7 @@ def generate_mock_portal_data(preset: str = "high_shelfware") -> Dict[str, Any]:
                 },
                 "pipelines": {
                     "deal_pipelines_count": 1,
-                    "deal_pipeline_names": ["Stark Edge Sales Pipeline"],
+                    "deal_pipeline_names": ["Primary Sales Pipeline"],
                     "ticket_pipelines_count": 1,
                     "ticket_pipeline_names": ["Customer Support Pipeline"]
                 },

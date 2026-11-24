@@ -290,13 +290,50 @@ INDEX_HTML = """<!DOCTYPE html>
                         </div>
                     </div>
 
-                    <!-- Discount Checkbox -->
-                    <div class="discount-box">
-                        <input type="checkbox" id="applyDiscounts" disabled />
-                        <div>
-                            <strong>Apply Custom Partner Discounts from Invoice:</strong>
-                            <div style="font-size: 12px; margin-top: 2px;">
-                                Optional: Applies negotiated partner invoice discounts (e.g. Stark Edge: Sales Pro 40% off, Service Pro 39.93% off, Content Pro 50% off, Marketing Starter ₹5,010/3mo, 3,000 AI Credits). <strong>Leave unchecked to evaluate standard HubSpot India INR catalog list prices for any portal.</strong>
+                    <!-- Portal Usage & Customization (100% Dynamic, Zero Hardcoding) -->
+                    <div style="margin-top: 24px; padding: 18px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                            <h3 style="font-size: 14.5px; font-weight: 700; color: #0f172a;">Portal Usage &amp; Customization (Auto-Detected)</h3>
+                            <span style="font-size: 11px; background: #e0f2fe; color: #0369a1; font-weight: 700; padding: 2px 8px; border-radius: 6px;">EDITABLE DEFAULTS</span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Company / Portal Name</label>
+                                <input type="text" id="portal_company_name" class="select-box" style="padding: 8px 12px; font-size: 13px;" placeholder="Auto-detected brand or name" disabled />
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Marketing Contacts Tier</label>
+                                <input type="number" id="contacts_tier_input" class="select-box" style="padding: 8px 12px; font-size: 13px;" placeholder="e.g. 7000 or 12000" disabled />
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">HubSpot Monthly AI Credits</label>
+                                <input type="number" id="credits_total_input" class="select-box" style="padding: 8px 12px; font-size: 13px;" value="0" placeholder="3000 for Pro/Ent" disabled />
+                            </div>
+                            <div>
+                                <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">AI Credits Used</label>
+                                <input type="number" id="credits_used_input" class="select-box" style="padding: 8px 12px; font-size: 13px;" value="0" placeholder="e.g. 460" disabled />
+                            </div>
+                        </div>
+
+                        <!-- Optional Invoiced Spend or Discount -->
+                        <div class="discount-box" style="margin-top: 10px; background: white; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px;">
+                            <input type="checkbox" id="applyDiscounts" onchange="toggleDiscountFields()" disabled style="cursor: pointer;" />
+                            <div style="flex: 1;">
+                                <label for="applyDiscounts" style="font-size: 13px; font-weight: 700; cursor: pointer;">Apply Custom Negotiated Invoice / Discount (Optional)</label>
+                                <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
+                                    Enable if your contract has customized discount pricing instead of standard Master Catalog rates.
+                                </div>
+                                <div id="discountInputs" style="display: none; margin-top: 10px; gap: 14px; flex-wrap: wrap;">
+                                    <div style="display: inline-block; margin-right: 14px;">
+                                        <label style="font-size: 11.5px; font-weight: 600; color: #475569; display: block; margin-bottom: 3px;">Contract Discount %</label>
+                                        <input type="number" id="custom_discount_pct" placeholder="e.g. 40" min="0" max="100" style="padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; width: 110px; font-size: 12.5px;">
+                                    </div>
+                                    <div style="display: inline-block;">
+                                        <label style="font-size: 11.5px; font-weight: 600; color: #475569; display: block; margin-bottom: 3px;">Total Quarterly Invoice (₹ / $)</label>
+                                        <input type="number" id="custom_quarterly_invoice" placeholder="e.g. 132820" style="padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; width: 160px; font-size: 12.5px;">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -322,7 +359,7 @@ INDEX_HTML = """<!DOCTYPE html>
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
 
-            const selects = ['plan_mkt', 'plan_sales', 'plan_service', 'plan_content', 'plan_data', 'plan_revenue', 'plan_crm', 'applyDiscounts'];
+            const selects = ['plan_mkt', 'plan_sales', 'plan_service', 'plan_content', 'plan_data', 'plan_revenue', 'plan_crm', 'applyDiscounts', 'portal_company_name', 'contacts_tier_input', 'credits_total_input', 'credits_used_input'];
             selects.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.disabled = locked;
@@ -464,6 +501,12 @@ INDEX_HTML = """<!DOCTYPE html>
                     if (res.detected_revenue_tier) document.getElementById('plan_revenue').value = res.detected_revenue_tier;
                     updateAllPlansAndSeats();
 
+                    // Auto-populate dynamic defaults into editable fields
+                    if (res.company_name) document.getElementById('portal_company_name').value = res.company_name;
+                    if (res.detected_contact_tier) document.getElementById('contacts_tier_input').value = res.detected_contact_tier;
+                    if (res.total_credits !== undefined) document.getElementById('credits_total_input').value = res.total_credits;
+                    if (res.used_credits !== undefined) document.getElementById('credits_used_input').value = res.used_credits;
+
                     // Unlock plan selection and enable Analyze button!
                     setPlansLocked(false);
                 } else {
@@ -488,6 +531,12 @@ INDEX_HTML = """<!DOCTYPE html>
                 badgeEl.style.color = '#991b1b';
                 setPlansLocked(true, 'Network error connecting to API.');
             }
+        }
+
+        function toggleDiscountFields() {
+            const isChecked = document.getElementById('applyDiscounts').checked;
+            const box = document.getElementById('discountInputs');
+            if (box) box.style.display = isChecked ? 'flex' : 'none';
         }
 
         function updateAllPlansAndSeats() {
@@ -533,39 +582,48 @@ INDEX_HTML = """<!DOCTYPE html>
             const hasDiscounts = document.getElementById('applyDiscounts').checked;
 
             const contractInfo = {};
-            if (window._detectedData && window._detectedData.detected_contact_tier) {
-                contractInfo.contacts_quota = {
-                    tier: window._detectedData.detected_contact_tier
-                };
+
+            // Dynamic Company Name
+            const compName = document.getElementById('portal_company_name').value.trim();
+            if (compName) {
+                contractInfo.company_name = compName;
             }
-            if (window._detectedData && window._detectedData.total_credits) {
+
+            // Dynamic Marketing Contacts Tier
+            const cTierVal = parseInt(document.getElementById('contacts_tier_input').value);
+            if (!isNaN(cTierVal) && cTierVal > 0) {
+                contractInfo.contacts_quota = { tier: cTierVal };
+            }
+
+            // Dynamic HubSpot AI Credits
+            const credTotal = parseInt(document.getElementById('credits_total_input').value);
+            const credUsed = parseInt(document.getElementById('credits_used_input').value) || 0;
+            if (!isNaN(credTotal) && credTotal > 0) {
                 contractInfo.credits = {
-                    total_credits: window._detectedData.total_credits,
-                    used_credits: window._detectedData.used_credits || 0,
+                    total_credits: credTotal,
+                    used_credits: credUsed,
                     resets_date: 'Monthly Renewal'
                 };
             }
 
-            // Only attach Stark Edge specific partner discount overrides if explicitly checked
+            // Optional Dynamic Partner Discounts / Invoice
             if (hasDiscounts) {
-                contractInfo.credits = {
-                    total_credits: 3000,
-                    used_credits: 230,
-                    wasted_credits: 2770,
-                    utilization_pct: 7.7,
-                    resets_date: 'Nov 25, 2026'
-                };
-                contractInfo.quarterly_billed = {
-                    'Marketing Hub': 5010.0,
-                    'Sales Hub': 29988.0,
-                    'Service Hub': 15011.99,
-                    'Content Hub': 62550.0
-                };
-                contractInfo.discounts = {
-                    'Sales Hub': 40.0,
-                    'Service Hub': 39.93,
-                    'Content Hub': 50.0
-                };
+                const discPctEl = document.getElementById('custom_discount_pct');
+                const discPct = discPctEl ? parseFloat(discPctEl.value) : 0;
+                const qInvEl = document.getElementById('custom_quarterly_invoice');
+                const qInv = qInvEl ? parseFloat(qInvEl.value) : 0;
+
+                if (!isNaN(discPct) && discPct > 0) {
+                    contractInfo.discounts = {
+                        'Sales Hub': discPct,
+                        'Service Hub': discPct,
+                        'Content Hub': discPct,
+                        'Marketing Hub': discPct
+                    };
+                }
+                if (!isNaN(qInv) && qInv > 0) {
+                    contractInfo.invoice_amount = qInv;
+                }
             }
 
             const payload = {
@@ -705,13 +763,15 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                     detected_contact_tier = max(1000, math.ceil(max(1, mkt_cnt) / 1000) * 1000)
 
                 portal_id = str(acc.get("portal_id", ""))
-                # Billing credits usage
-                if portal_id == "50399753":
-                    used_credits = 460
-                elif portal_id in ["50849936", "245317936"]:
-                    used_credits = 0
-                else:
-                    used_credits = 0
+                # Dynamic AI credits based on detected subscription tiers (NO hardcoded portal IDs or counts)
+                has_pro_or_ent = any(t in ["Professional", "Enterprise"] for t in [
+                    detected_mkt_tier,
+                    seats.get("detected_sales_tier"),
+                    seats.get("detected_service_tier"),
+                    seats.get("detected_revenue_tier")
+                ])
+                total_credits = 3000 if has_pro_or_ent else 0
+                used_credits = 0  # Dynamic default; user enters live usage from portal in the dashboard
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
@@ -733,7 +793,7 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                     "total_contacts": tot_cnt,
                     "marketing_contacts": mkt_cnt,
                     "detected_contact_tier": detected_contact_tier,
-                    "total_credits": 3000,
+                    "total_credits": total_credits,
                     "used_credits": used_credits,
                     "total_workflows": auto.get("total_workflows", 0),
                     "active_workflows": auto.get("active_workflows", 0),
