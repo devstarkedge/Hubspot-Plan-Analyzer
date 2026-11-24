@@ -650,7 +650,7 @@ class ReportGenerator:
         <div class="header">
             <div>
                 <h1>HubSpot Plan &amp; Feature Utilization Audit</h1>
-                <p>Portal: <strong>{account.get('company_name', 'HubSpot Portal')}</strong> (Portal ID: {account.get('portal_id', 'N/A')}) &bull; Currency: <strong>₹ INR</strong> &bull; Generated: {self.data.get('timestamp')}</p>
+                <p>Portal: <strong>{account.get('company_name', 'HubSpot Portal')}</strong> (Portal ID: {account.get('portal_id', 'N/A')}) &bull; Currency: <strong>{account.get('currency', 'USD')}</strong> (Benchmarked against INR Master Catalog) &bull; Generated: {self.data.get('timestamp')}</p>
                 <div class="plans-bar">
                     {plans_badges}
                 </div>
@@ -666,7 +666,7 @@ class ReportGenerator:
             <div class="metric-card">
                 <div class="title">Current Monthly Spend</div>
                 <div class="value">₹{fin.get('monthly_spend_inr', 0):,.0f}</div>
-                <div class="sub">Quarterly: ₹{fin.get('monthly_spend_inr', 0)*3:,.0f} &bull; Bill + GST: ₹132,821</div>
+                <div class="sub">Quarterly: ₹{fin.get('monthly_spend_inr', 0)*3:,.0f} &bull; Est. Annual: ₹{fin.get('monthly_spend_inr', 0)*12:,.0f}</div>
             </div>
             <div class="metric-card">
                 <div class="title">Wasted Monthly Spend</div>

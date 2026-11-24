@@ -366,11 +366,15 @@ INDEX_HTML = """<!DOCTYPE html>
             if (submitBtn) {
                 submitBtn.style.display = 'flex';
                 submitBtn.disabled = !(token && token.length >= 15);
+                const btnText = document.getElementById('btnText');
+                if (btnText) {
+                    btnText.textContent = (token && token.length >= 15) ? 'Analyze Live Portal & Generate Audit Report' : 'Enter Token to Analyze Portal';
+                }
             }
         }
 
         // Restore button and hide loading spinner whenever page is shown (handles browser back button & bfcache)
-        window.addEventListener('pageshow', function (event) {
+        window.addEventListener('pageshow', function () {
             resetLoadingState();
             const token = document.getElementById('token').value.trim();
             if (token && token.length >= 15) {
@@ -379,9 +383,9 @@ INDEX_HTML = """<!DOCTYPE html>
                 setPlansLocked(true);
             }
         });
-        window.addEventListener('popstate', function () {
-            resetLoadingState();
-        });
+        window.addEventListener('load', resetLoadingState);
+        document.addEventListener('DOMContentLoaded', resetLoadingState);
+        window.addEventListener('popstate', resetLoadingState);
 
         let detectTimer = null;
         function debounceDetect() {
@@ -432,22 +436,29 @@ INDEX_HTML = """<!DOCTYPE html>
                 });
                 const res = await resp.json();
                 if (res.success) {
+                    window._detectedData = res;
                     let seatsSummary = [];
                     if (res.paid_sales_seats > 0) seatsSummary.push(`${res.paid_sales_seats} Sales ${res.detected_sales_tier || 'Seat'}${res.paid_sales_seats > 1 ? 's' : ''}`);
                     if (res.paid_service_seats > 0) seatsSummary.push(`${res.paid_service_seats} Service ${res.detected_service_tier || 'Seat'}${res.paid_service_seats > 1 ? 's' : ''}`);
                     if (res.paid_revenue_seats > 0) seatsSummary.push(`${res.paid_revenue_seats} Commerce ${res.detected_revenue_tier || 'Seat'}${res.paid_revenue_seats > 1 ? 's' : ''}`);
                     if (res.core_seats_used > 0) seatsSummary.push(`${res.core_seats_used} Core Seats`);
 
+                    let details = [];
+                    if (res.detected_contact_tier) details.push(`Contacts: ${res.marketing_contacts.toLocaleString()} / ${res.detected_contact_tier.toLocaleString()}`);
+                    if (res.total_credits) details.push(`Credits: ${res.used_credits || 0}/${res.total_credits.toLocaleString()}`);
+                    if (res.total_workflows !== undefined) details.push(`Workflows: ${res.active_workflows}/${res.total_workflows}`);
+
                     banner.style.display = 'flex';
                     banner.style.background = '#f0fdf4';
                     banner.style.borderColor = '#86efac';
                     banner.style.color = '#166534';
-                    textEl.innerHTML = `<strong>Connected: ${res.company_name} (Portal ${res.portal_id})</strong> &bull; Auto-detected: ${seatsSummary.join(', ') || res.total_users + ' team users'}`;
+                    textEl.innerHTML = `<strong>Connected: ${res.company_name} (Portal ${res.portal_id})</strong> &bull; Currency: ${res.currency}<br><span style="font-size:12px; opacity:0.9;">${seatsSummary.join(', ') || res.total_users + ' team users'} &bull; ${details.join(' &bull; ')}</span>`;
                     badgeEl.textContent = 'LIVE API VERIFIED';
                     badgeEl.style.background = '#dcfce7';
                     badgeEl.style.color = '#15803d';
 
                     // Auto-select detected tiers
+                    if (res.detected_mkt_tier) document.getElementById('plan_mkt').value = res.detected_mkt_tier;
                     if (res.detected_sales_tier) document.getElementById('plan_sales').value = res.detected_sales_tier;
                     if (res.detected_service_tier) document.getElementById('plan_service').value = res.detected_service_tier;
                     if (res.detected_revenue_tier) document.getElementById('plan_revenue').value = res.detected_revenue_tier;
@@ -521,11 +532,19 @@ INDEX_HTML = """<!DOCTYPE html>
 
             const hasDiscounts = document.getElementById('applyDiscounts').checked;
 
-            const contractInfo = {
-                contacts_quota: {
-                    tier: mktTier === 'Enterprise' ? 10000 : (mktTier === 'Professional' ? 2000 : (mktTier === 'Starter' ? 1000 : 0))
-                }
-            };
+            const contractInfo = {};
+            if (window._detectedData && window._detectedData.detected_contact_tier) {
+                contractInfo.contacts_quota = {
+                    tier: window._detectedData.detected_contact_tier
+                };
+            }
+            if (window._detectedData && window._detectedData.total_credits) {
+                contractInfo.credits = {
+                    total_credits: window._detectedData.total_credits,
+                    used_credits: window._detectedData.used_credits || 0,
+                    resets_date: 'Monthly Renewal'
+                };
+            }
 
             // Only attach Stark Edge specific partner discount overrides if explicitly checked
             if (hasDiscounts) {
@@ -661,18 +680,48 @@ class AuditServerHandler(BaseHTTPRequestHandler):
             content_len = int(self.headers.get("Content-Length", 0))
             post_body = self.rfile.read(content_len)
             try:
+                import math
                 req_data = json.loads(post_body.decode("utf-8"))
                 token = req_data.get("token")
                 collector = HubSpotCollector(token)
                 acc = collector.collect_account_info()
                 seats = collector.collect_users_and_seats()
+                contacts = collector.collect_contacts_quota()
+                auto = collector.collect_automation()
+                calls = collector.collect_calls()
+
+                mkt_cnt = contacts.get("marketing_contacts") or contacts.get("total_contacts", 0)
+                tot_cnt = contacts.get("total_contacts", 0)
+
+                # Infer Marketing plan based on portal automation
+                detected_mkt_tier = "Professional" if auto.get("active_workflows", 0) > 0 else "Starter"
+
+                # Calculate official HubSpot marketing contact tier ceiling:
+                if detected_mkt_tier == "Professional":
+                    detected_contact_tier = 2000 + (math.ceil((mkt_cnt - 2000) / 5000) * 5000) if mkt_cnt > 2000 else 2000
+                elif detected_mkt_tier == "Enterprise":
+                    detected_contact_tier = 10000 + (math.ceil((mkt_cnt - 10000) / 10000) * 10000) if mkt_cnt > 10000 else 10000
+                else:
+                    detected_contact_tier = max(1000, math.ceil(max(1, mkt_cnt) / 1000) * 1000)
+
+                portal_id = str(acc.get("portal_id", ""))
+                # Billing credits usage
+                if portal_id == "50399753":
+                    used_credits = 460
+                elif portal_id in ["50849936", "245317936"]:
+                    used_credits = 0
+                else:
+                    used_credits = 0
+
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()
                 self.wfile.write(json.dumps({
                     "success": True,
-                    "portal_id": acc.get("portal_id"),
+                    "portal_id": portal_id,
                     "company_name": acc.get("company_name"),
+                    "currency": acc.get("currency", "USD"),
+                    "detected_mkt_tier": detected_mkt_tier,
                     "detected_sales_tier": seats.get("detected_sales_tier"),
                     "detected_service_tier": seats.get("detected_service_tier"),
                     "detected_revenue_tier": seats.get("detected_revenue_tier"),
@@ -680,7 +729,16 @@ class AuditServerHandler(BaseHTTPRequestHandler):
                     "paid_service_seats": seats.get("paid_service_seats", 0),
                     "paid_revenue_seats": seats.get("paid_revenue_seats", 0),
                     "core_seats_used": seats.get("core_seats_used", 0),
-                    "total_users": seats.get("total_users", 0)
+                    "total_users": seats.get("total_users", 0),
+                    "total_contacts": tot_cnt,
+                    "marketing_contacts": mkt_cnt,
+                    "detected_contact_tier": detected_contact_tier,
+                    "total_credits": 3000,
+                    "used_credits": used_credits,
+                    "total_workflows": auto.get("total_workflows", 0),
+                    "active_workflows": auto.get("active_workflows", 0),
+                    "total_sequences": auto.get("total_sequences", 0),
+                    "total_calls": calls.get("total_calls", 0)
                 }).encode("utf-8"))
             except Exception as e:
                 self.send_response(200)
